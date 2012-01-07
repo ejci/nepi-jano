@@ -105,7 +105,7 @@ app.load.article = function(id, url) {
  */
 var c = {};
 c.log = function(m) {
-	console.log(m);
+	//console.log(m);
 }
 /**
  * Utils namespace

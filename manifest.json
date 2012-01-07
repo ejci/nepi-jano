@@ -1,0 +1,17 @@
+{
+	"name": "Nepi Jano!",
+	"description": ":)",
+	"version": "0.1.0",
+	"permissions": ["http://*/"],
+	"app": {
+		"launch": {
+			"local_path": "main.html"
+		}
+	},
+	"homepage_url": "https://bitbucket.org/miroslavmagda/nepi-jano",
+	"icons": {
+		"16": "icon_16.png",
+		"48": "icon_48.png",
+		"128": "icon_128.png"
+	}
+}
