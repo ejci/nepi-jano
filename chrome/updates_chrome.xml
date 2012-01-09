@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<gupdate xmlns='http://www.google.com/update2/response' protocol='1.0'>
+  <app appid='lffjbhfpcncjgflidelfmbmbhjlpnpbi'>
+    <updatecheck codebase='https://bitbucket.org/miroslavmagda/nepi-jano/downloads/nepi%20jano.crx' version='0.1.1' />
+  </app>
+</gupdate>
