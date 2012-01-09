@@ -2,7 +2,7 @@
 	"name": "Nepi Jano!",
 	"description": ":)",
 	"version": "0.1.0",
-	"permissions": ["http://*/"],
+	"permissions": ["http://*/", "webRequest"],
 	"app": {
 		"launch": {
 			"local_path": "main.html"

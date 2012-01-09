@@ -25,7 +25,7 @@ app.load.mainPage = function() {
 			c.log(data);
 			$("#articleList .mainPage").empty();
 			$(data).find("feed").each(function() {
-				
+
 				$(this).find("item").each(function() {
 					var id = $(this).find('id').text();
 					var name = $(this).find('hdg').text();
@@ -47,7 +47,7 @@ app.load.popular = function() {
 			$("#articleList .popular").empty();
 			$(data).find("feed").each(function() {
 				$(this).find("items").each(function() {
-					$("#articleList .popular").append('<h4>'+$(this).attr('section')+'</h4>');
+					$("#articleList .popular").append('<h4>' + $(this).attr('section') + '</h4>');
 					$(this).find("item").each(function() {
 						var id = $(this).find('id').text();
 						var name = $(this).find('hdg').text();
@@ -87,25 +87,47 @@ app.load.article = function(id, url) {
 	$('#articleList').fadeOut();
 	var url = 'http://s.sme.sk/export/phone/html/?cf=' + id;
 	c.log(url);
-	$.ajax({
-		url : url,
-		dataType : 'text',
-		success : function(data) {
+	/* $.ajax({
+	 url : url,
+	 beforeSend : function(request) {
+	 request.setRequestHeader("User-Agent", "InsertUserAgentStringHere");
+	 },
+	 dataType : 'text',
+	 success : function(data) {
+	 data = data.replace(/<script/g, '<p class="hidden"')
+	 c.log(data)
+	 $("#articleContent").html(data);
+	 $('#articleContent').fadeIn();
+
+	 }
+	 });*/
+	c.log(xhr)
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = handleStateChange;
+	// Implemented elsewhere.
+	xhr.open("GET", url, true);
+	//xhr.setRequestHeader("x-user-agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/535.7 (KHTML, like Gecko) Chrome/16.0.912.75 Safari/535.7");
+	//xhr.setRequestHeader("x-user-agent", "dasdas");
+	xhr.send();
+	function handleStateChange() {
+		if(xhr.readyState == 4) {
+			var data = xhr.responseText;
 			data = data.replace(/<script/g, '<p class="hidden"')
-			console.log(data)
+			c.log(data);
 			$("#articleContent").html(data);
 			$('#articleContent').fadeIn();
-
 		}
-	});
-	//$('#articleContent').attr('src', url);
+	}
+
 }
+//$('#articleContent').attr('src', url);
+
 /**
  * C namespace
  */
 var c = {};
 c.log = function(m) {
-	//console.log(m);
+	console.log(m);
 }
 /**
  * Utils namespace
@@ -126,3 +148,12 @@ u.randomMuid = function(length) {
 $(function() {
 	app.init()
 });
+chrome.webRequest.onBeforeSendHeaders.addListener(function(details) {
+	console.log(details.requestHeaders);
+	delete details.requestHeaders['User-Agent'];
+	return {
+		requestHeaders : details.requestHeaders
+	};
+}, {
+	urls : ["http://*/"]
+}, ["blocking"]);
