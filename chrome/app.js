@@ -81,28 +81,9 @@ app.load.bullshit = function() {
 app.load.article = function(id, url) {
 	$('#articleContent').fadeOut(function() {
 		var url = 'http://s.sme.sk/export/phone/html/?cf=' + id;
-		c.log(url);
-		/* $.ajax({
-		 url : url,
-		 beforeSend : function(request) {
-		 request.setRequestHeader("User-Agent", "InsertUserAgentStringHere");
-		 },
-		 dataType : 'text',
-		 success : function(data) {
-		 data = data.replace(/<script/g, '<p class="hidden"')
-		 c.log(data)
-		 $("#articleContent").html(data);
-		 $('#articleContent').fadeIn();
-
-		 }
-		 });*/
-		c.log(xhr)
 		var xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = handleStateChange;
-		// Implemented elsewhere.
 		xhr.open("GET", url, true);
-		//xhr.setRequestHeader("x-user-agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/535.7 (KHTML, like Gecko) Chrome/16.0.912.75 Safari/535.7");
-		//xhr.setRequestHeader("x-user-agent", "dasdas");
 		xhr.send();
 		function handleStateChange() {
 			if(xhr.readyState == 4) {
@@ -116,8 +97,6 @@ app.load.article = function(id, url) {
 
 	});
 }
-//$('#articleContent').attr('src', url);
-
 /**
  * C namespace
  */
@@ -144,12 +123,22 @@ u.randomMuid = function(length) {
 $(function() {
 	app.init()
 });
-/*chrome.webRequest.onBeforeSendHeaders.addListener(function(details) {
-	c.log(details.requestHeaders);
-	delete details.requestHeaders['User-Agent'];
+var requestFilter = {
+	urls : ["<all_urls>"]
+};
+//TODO: zrusit ked vyjde verzia 17.x
+chrome.experimental.webRequest.onBeforeSendHeaders.addListener(function(details) {
+	var headers = details.requestHeaders;
+	console.log(headers);
+	for(var i = 0, l = headers.length; i < l; ++i) {
+		if(headers[i].name == 'User-Agent') {
+			break;
+		}
+	}
+	//if(i < headers.length) {
+	headers[i].value = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/535.7 (KHTML, like Gecko) Chrome/16.0.912.75 Safari/535.7';
+	//}
 	return {
-		requestHeaders : details.requestHeaders
+		requestHeaders : headers
 	};
-}, {
-	urls : ["http://*\/"]
-}, ["blocking"]);*/
+}, requestFilter, ['requestHeaders', 'blocking']);

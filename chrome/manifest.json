@@ -1,8 +1,9 @@
 {
 	"name": "Nepi Jano!",
 	"description": ":)",
-	"version": "0.1.1",
-	"permissions": ["http://*/", "webRequest"],
+	"version": "0.1.2",
+	"permissions": ["webRequest", "webRequestBlocking", "<all_urls>", "tabs", "experimental"],
+	"minimum_chrome_version": "14",
 	"app": {
 		"launch": {
 			"local_path": "main.html"
