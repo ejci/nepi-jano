@@ -6,14 +6,8 @@ app.init = function() {
 	app.load.mainPage();
 	app.load.popular();
 	app.load.bullshit();
-	$('#menu').click(function() {
-		app.closeArticle();
-	});
 };
-app.closeArticle = function() {
-	$('#articleList').fadeIn();
-	$('#articleContent').fadeOut();
-};
+
 app.load = {};
 app.load.mainPage = function() {
 	var url = 'http://s.sme.sk/export/phone/?t=hp&muid=' + u.randomMuid(16);
@@ -75,6 +69,7 @@ app.load.bullshit = function() {
 					$(this).find("item").each(function() {
 						var id = $(this).find('id').text();
 						var name = $(this).find('hdg').text();
+						c.log(this);
 						$("#articleList .bullshit").append('<a class="link" href="#' + id + '" onClick="app.load.article(' + id + ');">' + name + '</a>');
 
 					});
@@ -84,41 +79,42 @@ app.load.bullshit = function() {
 	});
 };
 app.load.article = function(id, url) {
-	$('#articleList').fadeOut();
-	var url = 'http://s.sme.sk/export/phone/html/?cf=' + id;
-	c.log(url);
-	/* $.ajax({
-	 url : url,
-	 beforeSend : function(request) {
-	 request.setRequestHeader("User-Agent", "InsertUserAgentStringHere");
-	 },
-	 dataType : 'text',
-	 success : function(data) {
-	 data = data.replace(/<script/g, '<p class="hidden"')
-	 c.log(data)
-	 $("#articleContent").html(data);
-	 $('#articleContent').fadeIn();
+	$('#articleContent').fadeOut(function() {
+		var url = 'http://s.sme.sk/export/phone/html/?cf=' + id;
+		c.log(url);
+		/* $.ajax({
+		 url : url,
+		 beforeSend : function(request) {
+		 request.setRequestHeader("User-Agent", "InsertUserAgentStringHere");
+		 },
+		 dataType : 'text',
+		 success : function(data) {
+		 data = data.replace(/<script/g, '<p class="hidden"')
+		 c.log(data)
+		 $("#articleContent").html(data);
+		 $('#articleContent').fadeIn();
 
-	 }
-	 });*/
-	c.log(xhr)
-	var xhr = new XMLHttpRequest();
-	xhr.onreadystatechange = handleStateChange;
-	// Implemented elsewhere.
-	xhr.open("GET", url, true);
-	//xhr.setRequestHeader("x-user-agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/535.7 (KHTML, like Gecko) Chrome/16.0.912.75 Safari/535.7");
-	//xhr.setRequestHeader("x-user-agent", "dasdas");
-	xhr.send();
-	function handleStateChange() {
-		if(xhr.readyState == 4) {
-			var data = xhr.responseText;
-			data = data.replace(/<script/g, '<p class="hidden"')
-			c.log(data);
-			$("#articleContent").html(data);
-			$('#articleContent').fadeIn();
+		 }
+		 });*/
+		c.log(xhr)
+		var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = handleStateChange;
+		// Implemented elsewhere.
+		xhr.open("GET", url, true);
+		//xhr.setRequestHeader("x-user-agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/535.7 (KHTML, like Gecko) Chrome/16.0.912.75 Safari/535.7");
+		//xhr.setRequestHeader("x-user-agent", "dasdas");
+		xhr.send();
+		function handleStateChange() {
+			if(xhr.readyState == 4) {
+				var data = xhr.responseText;
+				data = data.replace(/<script/g, '<p class="hidden"')
+				c.log(data);
+				$("#articleContent").html(data);
+				$('#articleContent').fadeIn();
+			}
 		}
-	}
 
+	});
 }
 //$('#articleContent').attr('src', url);
 
@@ -127,7 +123,7 @@ app.load.article = function(id, url) {
  */
 var c = {};
 c.log = function(m) {
-	console.log(m);
+	//console.log(m);
 }
 /**
  * Utils namespace
@@ -148,12 +144,12 @@ u.randomMuid = function(length) {
 $(function() {
 	app.init()
 });
-chrome.webRequest.onBeforeSendHeaders.addListener(function(details) {
-	console.log(details.requestHeaders);
+/*chrome.webRequest.onBeforeSendHeaders.addListener(function(details) {
+	c.log(details.requestHeaders);
 	delete details.requestHeaders['User-Agent'];
 	return {
 		requestHeaders : details.requestHeaders
 	};
 }, {
-	urls : ["http://*/"]
-}, ["blocking"]);
+	urls : ["http://*\/"]
+}, ["blocking"]);*/

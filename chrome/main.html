@@ -3,87 +3,95 @@
 		<title>Nepi Jano!</title>
 		<script src="/lib/jquery-1.6.2.min.js"></script>
 		<style>
-			body {
-				padding: 0px;
-				margin: 0px;
-				font-family: Trebuchet MS, sans-serif;
-				font-size: 1em;
-			}
-			hr {
-				border-top: 0px;
-				border-left: 0px;
-				border-right: 0px;
-				border-bottom: 1px solid black;
-				width: 100%;
-			}
-			.navigation {
-				width: 100%;
-				height: 50px;
-				background-color: #1B75BB;
-			}
-			.articleList {
-				padding: 10px;
-				position: absolute;
-				top: 30px;
-				left: 0px;
-			}
-			.link {
-				width: 100%;
-				height: 25px;
-				display: block;
-				color: #a50000;
-			}
-			.link:hover {
-				color: #990000;
-			}
-			.link:visited {
-				color: #cc0000;
-			}
-			.articleContent {
-				position: absolute;
-				width: 800px;
-				top: 30px;
-				left: 0px;
-				border: 0px;
-				height: 100%;
-			}
-			.hidden {
-				display: none;
-			}
-			.menu {
-				position: absolute;
-				width: 100%;
-				height: 30px;
-				left: 0px;
-				top: 0px;
-				background-color: #333;
-				font-size: 20px;
-				line-height: 30px;
-				color: #fff;
-				text-align: center;
-				cursor: hand;
-			}
+body {
+	padding:0px;
+	margin:0px;
+	font-family:Trebuchet MS,sans-serif;
+	font-size:1em;
+}
+hr {
+	border-top:0px;
+	border-left:0px;
+	border-right:0px;
+	border-bottom:1px solid black;
+	width:100%;
+}
+.leftColumn {
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:30%;
+	height:100%;
+	background-color:#fff;
+	overflow-y: scroll;
+	font-size:0.8em;
+}
+.rightColumn {
+	position:absolute;
+	top:0px;
+	left:30%;
+	width:70%;
+	height:100%;
+	background-color:#fff;
+	overflow-y: scroll;
+}
+
+.articleList {
+	padding:10px;
+}
+.link {
+	width:100%;
+	display:block;
+	padding: 3px;
+	color:#a50000;
+}
+.link:hover {
+	color:#990000;
+}
+.link:visited {
+	color:#cc0000;
+}
+.articleContent {
+	position:absolute;
+	width:800px;
+	top:30px;
+	left:0px;
+	border:0px;
+}
+.hidden {
+	display:none;
+}
+.menu {
+	position:absolute;
+	width:100%;
+	height:30px;
+	left:0px;
+	top:0px;
+	background-color:#333;
+	font-size:20px;
+	line-height:30px;
+	color:#fff;
+	text-align:center;
+	cursor:hand;
+}
 		</style>
 	</head>
 	<body>
-		<div id="menu" class="menu">
-			Menu
+		<div class="leftColumn">
+			<div id="articleList" class="articleList">
+				<h3>Komentare:</h3>
+				<div class="bullshit"></div>
+				<hr />
+				<h3>Dnes dolezite:</h3>
+				<div class="mainPage"></div>
+				<hr />
+				<h3>Popularne:</h3>
+				<div class="popular"></div>
+			</div>
 		</div>
-		<div id="articleContent" class="articleContent"></div>
-		<div id="articleList" class="articleList">
-			<h3>Komentare:</h3>
-			<div class="bullshit"></div>
-			<hr />
-			<h3>Dnes dolezite:</h3>
-			<div class="mainPage"></div>
-			<hr />
-			<h3>Popularne:</h3>
-			<div class="popular"></div>
-			<hr />
+		<div class="rightColumn">
+			<div id="articleContent" class="articleContent"></div>
 		</div>
-		<hr />
-		<!--iframe id="articleContent" src="" class="articleContent">
-		</iframe-->
 		<script src="app.js"></script>
 	</body>
 </html>
