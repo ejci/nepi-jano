@@ -1,19 +1,27 @@
 {
-	"name": "Nepi Jano!",
-	"description": ":)",
-	"version": "0.1.2",
-	"permissions": ["webRequest", "webRequestBlocking", "<all_urls>", "tabs", "experimental"],
-	"minimum_chrome_version": "14",
-	"app": {
-		"launch": {
-			"local_path": "main.html"
-		}
-	},
-	"update_url": "https://bitbucket.org/miroslavmagda/nepi-jano/downloads/updates_chrome.xml",
-	"homepage_url": "https://bitbucket.org/miroslavmagda/nepi-jano",
-	"icons": {
-		"16": "icon_16.png",
-		"48": "icon_48.png",
-		"128": "icon_128.png"
-	}
+    "name": "Nepi Jano!",
+    "description": "Nepi Jano! is a Google Chrome extension that allows read paid content on [www.sme.sk](http://www.sme.sk).",
+    "version": "0.9.0",
+    "manifest_version": 2,
+    "permissions": ["webRequest", "webRequestBlocking", "*://*.sme.sk/*"],
+    "background": {
+        "scripts": ["background.js"]
+    },
+    "content_scripts": [
+        {
+            "js": ["lib/jquery-1.8.2.min.js", "nepijano.js"],
+            "matches": ["*://*.sme.sk/*"]
+        }
+    ],
+    "app": {
+        "launch": {
+            "local_path": "app.html"
+        }
+    },
+    "homepage_url": "https://bitbucket.org/miroslavmagda/nepi-jano",
+    "icons": {
+        "16": "icon_16.png",
+        "48": "icon_48.png",
+        "128": "icon_128.png"
+    }
 }

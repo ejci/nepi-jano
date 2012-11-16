@@ -127,7 +127,7 @@ var requestFilter = {
 	urls : ["<all_urls>"]
 };
 //TODO: zrusit ked vyjde verzia 17.x
-chrome.experimental.webRequest.onBeforeSendHeaders.addListener(function(details) {
+chrome.webRequest.onBeforeSendHeaders.addListener(function(details) {
 	var headers = details.requestHeaders;
 	console.log(headers);
 	for(var i = 0, l = headers.length; i < l; ++i) {
