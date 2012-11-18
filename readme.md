@@ -10,11 +10,11 @@ Just install extension and click on some paid link on [www.sme.sk](http://www.sm
 ##How it works
 If you have an iOS or Andorid [www.sme.sk](http://www.sme.sk) application you can read also sme.sk content that regular web users can't read.
 They are using simple webview to display the article content. So it was realy simple get the source url and find out that the only security they have is user agent string.
-So what this extension does is that it basicly loads the content for mobile app and displays it insted the regulear content on web page.
+What this extension does is that it basicly loads the content for mobile app and displays it insted the regulear content on web page.
 
 ##Disclaimer
 This extension was made only for test purposes.
-Buy [Piano](http://www.piano.sk) subscription. You wil save hungry children in africa!
+Buy [Piano](http://www.pianomedia.sk) subscription. You wil save hungry children in Africa!
 Seriosly. Dont be an asshole and buy subscription.
 
 
