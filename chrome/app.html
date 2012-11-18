@@ -1,14 +1,61 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="1;url=https://bitbucket.org/miroslavmagda/nepi-jano">
-    <script>
-        window.location.href = "https://bitbucket.org/miroslavmagda/nepi-jano"
-    </script>
-    <title>Page Redirection</title>
-</head>
-<body>
-If you are not redirected automatically, follow the <a href="https://bitbucket.org/miroslavmagda/nepi-jano">http://blog.ejci.net</a>.
-</body>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="refresh" content="5;url=https://bitbucket.org/miroslavmagda/nepi-jano">
+		<script>
+			setTimeout(function() {
+				window.location.href = "https://bitbucket.org/miroslavmagda/nepi-jano";
+			}, 5000);
+		</script>
+		<style>
+			html {
+				height: 100%;
+			}
+			body {
+				margin: 0;
+				padding: 0;
+				height: 100%;
+				background: #900;
+				background-image: -moz-linear-gradient(right top,#900 0%,#a00 100%);
+				background-image: -webkit-gradient(linear,left top, right bottom,color-stop(0, #900),color-stop(1, #a00));
+				background: -webkit-linear-gradient(left top, #900 0%, #a00 100%);
+				background: -o-linear-gradient(left top, #900 0%, #a00 100%);
+				background: -ms-linear-gradient(left top, #900 0%, #a00 100%);
+				background: linear-gradient(left top, #900 0%, #a00 100%);
+			}
+			.content {
+				font: 16px arial, verdana, sans-serif;
+				text-align: center;
+				color: #eee;
+				text-shadow: 1px 1px #900;
+				line-height: 40px;
+				position: fixed;
+				width: 400px;
+				height: 40px;
+				top: 50%;
+				left: 50%;
+				margin-top: -20px;
+				margin-left: -200px;
+			}
+			a:link {
+				color: #fff;
+				text-shadow: 1px 1px #900;
+			}
+			a:visited {
+				color: #ddd;
+				text-shadow: 1px 1px #900;
+			}
+			a:hover {
+				color: #ccc;
+				text-shadow: 1px 1px #900;
+			}
+		</style>
+		<title>Page Redirection</title>
+	</head>
+	<body>
+		<div class="content">
+			If you are not redirected automatically, follow the <a href="https://bitbucket.org/miroslavmagda/nepi-jano">http://blog.ejci.net</a>
+		</div>
+	</body>
 </html>

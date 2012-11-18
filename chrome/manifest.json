@@ -1,6 +1,6 @@
 {
     "name": "Nepi Jano!",
-    "description": "Nepi Jano! is a Google Chrome extension that allows read paid content on [www.sme.sk](http://www.sme.sk).",
+    "description": "This extension allows read paid content on www.sme.sk",
     "version": "0.9.0",
     "manifest_version": 2,
     "permissions": ["webRequest", "webRequestBlocking", "*://*.sme.sk/*"],

@@ -11,4 +11,4 @@ chrome.webRequest.onBeforeSendHeaders.addListener(function(details) {
 	};
 }, {
 	urls : ["*://*.sme.sk/*"]
-}, ["blocking", "requestHeaders"]); 
+}, ["blocking", "requestHeaders"]);
