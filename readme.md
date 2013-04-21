@@ -14,7 +14,7 @@ Before instalation make sure that you uninstalled older version of this extensio
 Just install extension and click on some paid link on [www.sme.sk](http://www.sme.sk) and wait for it...
 
 ##How it works
-Read my [blog]() post about it.
+Read my [blog](http://blog.ejci.net/2013/04/21/piano-and-sme-sk/) post about it.
 
 ##Disclaimer
 This extension was made only for test purposes.
