@@ -1,7 +1,7 @@
 /**
  * @fileOverview Nepi Jano Google Chrome extension
  * @author Miroslav Magda, http://blog.ejci.net
- * @version 0.9.1
+ * @version 0.9.2
  */
 
 /**
@@ -148,6 +148,14 @@ var app = (function() {
                             $('#article-box #itext_content .discus').hide();
                             $('#article-box #itext_content link').remove();
                             $('#article-box #itext_content style').remove();
+                            $('#article-box a').each(function(index) {
+                                //change s.sme.sk/export/phone/?c=XXX to www.sme.sk/c/XXX/
+                                var url = $(this).attr('href');
+                                var cId = utils.urlParam('c', $(this).attr('href'));
+                                if (/s.sme.sk\//i.test(url) && cId) {
+                                    $(this).attr('href', 'http://www.sme.sk/c/' + cId + '/');
+                                }
+                            });
                             var t = setTimeout(function() {
                                 $('#article-box #itext_content').attr('style', '-webkit-filter: blur(0px);');
                             }, 500);
