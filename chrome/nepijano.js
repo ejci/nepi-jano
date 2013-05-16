@@ -3,57 +3,57 @@
  * @author Miroslav Magda, http://blog.ejci.net
  * @version 0.9.2
  */
+/**
+ * some utils
+ */
+var utils = {};
 
+/**
+ * get parameter from url (if exists)
+ */
+utils.urlParam = function(name, url) {
+    url = (url) ? url : window.location.href;
+    name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+    var regexS = "[\\?&]" + name + "=([^&#]*)";
+    var regex = new RegExp(regexS);
+    var results = regex.exec(url);
+    if (results === null) {
+        return false;
+    } else {
+        return results[1];
+    }
+    return false;
+};
+
+/**
+ * Artcile ID
+ */
+utils.articleId = function() {
+    var articleId = document.location.pathname.split('/')[2];
+    if (parseInt(articleId, 10) == articleId) {
+        return articleId;
+    } else {
+        return false;
+    }
+    return false;
+}
+/**
+ * Get video ID
+ */
+utils.videoId = function() {
+    var videoId = document.location.pathname.split('/')[2];
+    if (parseInt(videoId, 10) == videoId) {
+        return videoId;
+    } else {
+        return false;
+    }
+    return false;
+}
 /**
  * sme.sk
  */
 var sme = (function() {
-    /**
-     * some utils
-     */
-    var utils = {};
 
-    /**
-     * get parameter from url (if exists)
-     */
-    utils.urlParam = function(name, url) {
-        url = (url) ? url : window.location.href;
-        name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-        var regexS = "[\\?&]" + name + "=([^&#]*)";
-        var regex = new RegExp(regexS);
-        var results = regex.exec(url);
-        if (results === null) {
-            return false;
-        } else {
-            return results[1];
-        }
-        return false;
-    };
-
-    /**
-     * Artcile ID
-     */
-    utils.articleId = function() {
-        var articleId = document.location.pathname.split('/')[2];
-        if (parseInt(articleId, 10) === articleId) {
-            return articleId;
-        } else {
-            return false;
-        }
-        return false;
-    }
-    /**
-     * Get video ID
-     */
-    utils.videoId = function() {
-        var videoId = document.location.pathname.split('/')[2];
-        if (parseInt(videoId, 10) === videoId) {
-            return videoId;
-        } else {
-            return false;
-        }
-        return false;
-    }
     /**
      * Init app
      */
@@ -64,7 +64,7 @@ var sme = (function() {
             allowVideo();
         }
         //article
-        else if (/.sk\/c\//i.test(document.location)) {
+        else if (/sme.sk\/c\//i.test(document.location)) {
             //console.log('PIANO: article');
             allowArticle();
         }
