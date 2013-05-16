@@ -5,50 +5,55 @@
  */
 
 /**
- * some utils
+ * sme.sk
  */
-var utils = {};
-/**
- * get parameter from url (if exists)
- */
-utils.urlParam = function(name, url) {
-    url = (url) ? url : window.location.href;
-    name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-    var regexS = "[\\?&]" + name + "=([^&#]*)";
-    var regex = new RegExp(regexS);
-    var results = regex.exec(url);
-    if (results == null) {
+var sme = (function() {
+    /**
+     * some utils
+     */
+    var utils = {};
+
+    /**
+     * get parameter from url (if exists)
+     */
+    utils.urlParam = function(name, url) {
+        url = (url) ? url : window.location.href;
+        name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+        var regexS = "[\\?&]" + name + "=([^&#]*)";
+        var regex = new RegExp(regexS);
+        var results = regex.exec(url);
+        if (results === null) {
+            return false;
+        } else {
+            return results[1];
+        }
         return false;
-    } else {
-        return results[1];
-    }
-};
-/**
- * Artcile ID
- */
-utils.articleId = function() {
-    var articleId = document.location.pathname.split('/')[2];
-    if (parseInt(articleId, 10) == articleId) {
-        return articleId;
-    } else {
-        return false;
-    }
-}
-/**
- * Get video ID
- */
-utils.videoId = function() {
-    var videoId = document.location.pathname.split('/')[2];
-    if (parseInt(videoId, 10) == videoId) {
-        return videoId;
-    } else {
+    };
+
+    /**
+     * Artcile ID
+     */
+    utils.articleId = function() {
+        var articleId = document.location.pathname.split('/')[2];
+        if (parseInt(articleId, 10) === articleId) {
+            return articleId;
+        } else {
+            return false;
+        }
         return false;
     }
-}
-/**
- * namespace
- */
-var app = (function() {
+    /**
+     * Get video ID
+     */
+    utils.videoId = function() {
+        var videoId = document.location.pathname.split('/')[2];
+        if (parseInt(videoId, 10) === videoId) {
+            return videoId;
+        } else {
+            return false;
+        }
+        return false;
+    }
     /**
      * Init app
      */
@@ -86,7 +91,7 @@ var app = (function() {
                     xhr.open("GET", url, true);
                     xhr.send();
                     function handleStateChange() {
-                        if (xhr.readyState == 4) {
+                        if (xhr.readyState === 4) {
                             //$('#article-box #itext_content').empty();
                             var data = xhr.responseText;
                             //remove javascript from response
@@ -136,7 +141,7 @@ var app = (function() {
                     xhr.open("GET", url, true);
                     xhr.send();
                     function handleStateChange() {
-                        if (xhr.readyState == 4) {
+                        if (xhr.readyState === 4) {
                             //$('#article-box #itext_content').empty();
                             var data = xhr.responseText;
                             //remove javascript from response
@@ -170,7 +175,90 @@ var app = (function() {
         }
 
     };
-    init();
-    return true
+    return {
+        init : init
+    }
 })();
 
+var hn = (function() {
+    var init = function() {
+        try {
+            //check for piano
+            var isPiano = ($('#body_inhalt .piano-locked-article-top').length != 0);
+            if (isPiano) {
+                var feed = false;
+                //titulka
+                if (/hnonline.sk\/c1/i.test(document.location)) {
+                    feed = 'https://apiserver.hnonline.sk/content/fallback/xml/list/titulka/';
+                }
+                //ekonomika
+                if (/hnonline.sk\/ekonomika\//i.test(document.location)) {
+                    feed = 'https://apiserver.hnonline.sk/content/fallback/xml/list/ekonomika-a-firmy/';
+                }
+                //slovensko
+                if (/hnonline.sk\/slovensko\//i.test(document.location)) {
+                    feed = 'https://apiserver.hnonline.sk/content/fallback/xml/list/slovensko/';
+                }
+                //svet
+                if (/hnonline.sk\/svet\//i.test(document.location)) {
+                    feed = 'https://apiserver.hnonline.sk/content/fallback/xml/list/svet/';
+                }
+                //nazory
+                if (/hnonline.sk\/nazory\//i.test(document.location)) {
+                    feed = 'https://apiserver.hnonline.sk/content/fallback/xml/list/nazory-a-analyzy/';
+                }
+                //sport
+                if (/hnonline.sk\/sport\//i.test(document.location)) {
+                    feed = 'https://apiserver.hnonline.sk/content/fallback/xml/list/sport/';
+                }
+                //get article id from url
+                var articleId = false;
+                articleId = ((''+document.location).split('-')[1]);
+                if (feed && articleId) {
+                    allowArticle(articleId, feed);
+                }
+            }
+        } catch(e) {
+            console.error('PIANO: error', e);
+        }
+    };
+    var allowArticle = function(articleId, feed) {
+        console.log(feed, articleId);
+        $('#body_inhalt .detail-text').attr('style', '-webkit-transition: all 1s ease-in-out');
+        $('#body_inhalt .detail-text').attr('style', '-webkit-filter: blur(8px);');
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = handleStateChange;
+        xhr.open("GET", feed, true);
+        xhr.send();
+        function handleStateChange() {
+            if (xhr.readyState === 4) {
+                try {
+                    var xml = $.parseXML(xhr.responseText);
+                    var $xml = $(xml)
+                    var article = $xml.find('article[id="' + articleId + '"] body');
+                    console.log(article)
+                    //if exists then replace piano content...
+                    if (article.length > 0) {
+                        $('#body_inhalt .detail-text').html($('<div/>').html(article).text());
+                    }
+                } catch(e) {
+                    console.error('PIANO: error', e);
+                }
+                var t = setTimeout(function() {
+                    $('#body_inhalt .detail-text').attr('style', '-webkit-filter: blur(0px);');
+                }, 500);
+            }
+        }
+
+    }
+    return {
+        init : init
+    }
+})();
+
+if (/sme.sk\//i.test(document.location)) {
+    sme.init();
+}
+if (/hnonline.sk\//i.test(document.location)) {
+    hn.init();
+}
