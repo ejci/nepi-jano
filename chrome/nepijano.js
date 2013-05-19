@@ -1,71 +1,71 @@
 /**
  * @fileOverview Nepi Jano Google Chrome extension
  * @author Miroslav Magda, http://blog.ejci.net
- * @version 0.9.2
+ * @version 0.9.4
  */
-/**
- * some utils
- */
-var utils = {};
 
-/**
- * get parameter from url (if exists)
- */
-utils.urlParam = function(name, url) {
-    url = (url) ? url : window.location.href;
-    name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-    var regexS = "[\\?&]" + name + "=([^&#]*)";
-    var regex = new RegExp(regexS);
-    var results = regex.exec(url);
-    if (results === null) {
-        return false;
-    } else {
-        return results[1];
-    }
-    return false;
-};
-
-/**
- * Artcile ID
- */
-utils.articleId = function() {
-    var articleId = document.location.pathname.split('/')[2];
-    if (parseInt(articleId, 10) == articleId) {
-        return articleId;
-    } else {
-        return false;
-    }
-    return false;
-}
-/**
- * Get video ID
- */
-utils.videoId = function() {
-    var videoId = document.location.pathname.split('/')[2];
-    if (parseInt(videoId, 10) == videoId) {
-        return videoId;
-    } else {
-        return false;
-    }
-    return false;
-}
 /**
  * sme.sk
  */
 var sme = (function() {
+    /**
+     * some utils
+     */
+    var utils = {};
 
+    /**
+     * get parameter from url (if exists)
+     */
+    utils.urlParam = function(name, url) {
+        url = (url) ? url : window.location.href;
+        name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+        var regexS = "[\\?&]" + name + "=([^&#]*)";
+        var regex = new RegExp(regexS);
+        var results = regex.exec(url);
+        if (results === null) {
+            return false;
+        } else {
+            return results[1];
+        }
+        return false;
+    };
+
+    /**
+     * Artcile ID
+     */
+    utils.articleId = function() {
+        var articleId = document.location.pathname.split('/')[2];
+        if (parseInt(articleId, 10) == articleId) {
+            return articleId;
+        } else {
+            return false;
+        }
+        return false;
+    }
+    /**
+     * Get video ID
+     */
+    utils.videoId = function() {
+        var videoId = document.location.pathname.split('/')[2];
+        if (parseInt(videoId, 10) == videoId) {
+            return videoId;
+        } else {
+            return false;
+        }
+        return false;
+    }
     /**
      * Init app
      */
     var init = function() {
         //video
         if (/tv.sme.sk\//i.test(document.location)) {
-            //console.log('PIANO: video');
+            //console.log('Nepi Jano: video');
             allowVideo();
         }
         //article
         else if (/sme.sk\/c\//i.test(document.location)) {
-            //console.log('PIANO: article');
+            //console.log('Nepi Jano: article');
             allowArticle();
         }
     };
@@ -78,7 +78,7 @@ var sme = (function() {
             //check for piano content (message)
             var isPiano = ($('.tvpiano').length != 0);
             if (isPiano) {
-                //console.log('PIANO: Changing content :) ');
+                //console.log('Nepi Jano: Changing content :) ');
                 var articleId = utils.articleId();
                 if (articleId) {
                     //css3 "magic"
@@ -114,7 +114,7 @@ var sme = (function() {
                 }
             }
         } catch(e) {
-            console.error('PIANO: error', e);
+            console.error('Nepi Jano: error', e);
         }
 
     };
@@ -128,7 +128,7 @@ var sme = (function() {
             var isPiano1 = ($('#article-box #itext_content .art-perex-piano').length != 0);
             var isPiano2 = ($('#article-box #itext_content .art-nexttext-piano').length != 0);
             if (isPiano1 || isPiano2) {
-                //console.log('PIANO: Changing content :) ');
+                //console.log('Nepi Jano: Changing content :) ');
                 var articleId = utils.articleId();
                 if (articleId) {
                     //css3 "magic"
@@ -171,7 +171,7 @@ var sme = (function() {
                 }
             }
         } catch(e) {
-            console.error('PIANO: error', e);
+            console.error('Nepi Jano: error', e);
         }
 
     };
@@ -180,6 +180,9 @@ var sme = (function() {
     }
 })();
 
+/**
+ * hnonline.sk
+ */
 var hn = (function() {
     var init = function() {
         try {
@@ -219,11 +222,10 @@ var hn = (function() {
                 }
             }
         } catch(e) {
-            console.error('PIANO: error', e);
+            console.error('Nepi Jano: error', e);
         }
     };
     var allowArticle = function(articleId, feed) {
-        console.log(feed, articleId);
         $('#body_inhalt .detail-text').attr('style', '-webkit-transition: all 1s ease-in-out');
         $('#body_inhalt .detail-text').attr('style', '-webkit-filter: blur(8px);');
         var xhr = new XMLHttpRequest();
@@ -235,14 +237,24 @@ var hn = (function() {
                 try {
                     var xml = $.parseXML(xhr.responseText);
                     var $xml = $(xml)
+                    //sollution from 2013.05.16 was fixed by hnonline.sk developers
+                    /*
                     var article = $xml.find('article[id="' + articleId + '"] body');
                     console.log(article)
                     //if exists then replace piano content...
                     if (article.length > 0) {
-                        $('#body_inhalt .detail-text').html($('<div/>').html(article).text());
+                    $('#body_inhalt .detail-text').html($('<div/>').html(article).text());
                     }
+                    */
+                    //new sollution :)
+                    $xml.find('article').each(function() {
+                        var url = $(this).find('url').text();
+                        if (url.split('-')[1] == (''+document.location).split('-')[1]) {
+                            $('#body_inhalt .detail-text').html($('<div/>').html($(this).find('body')).text());
+                        }
+                    });
                 } catch(e) {
-                    console.error('PIANO: error', e);
+                    console.error('Nepi Jano: error', e);
                 }
                 var t = setTimeout(function() {
                     $('#body_inhalt .detail-text').attr('style', '-webkit-filter: blur(0px);');
@@ -256,9 +268,83 @@ var hn = (function() {
     }
 })();
 
+/**
+ * etrend.sk
+ */
+var etrend = (function() {
+    var init = function() {
+        try {
+            //check for piano
+            var isPiano = ($('#article_detail .piano-box').length != 0);
+            var isPaid = ($('#article_detail .active_box .boxes').length != 0);
+            if (isPiano || isPaid) {
+                var articleId = false;
+                articleId = $($('#article_detail .title div')[0]).text();
+                if (articleId) {
+                    allowArticle(articleId);
+                }
+
+            }
+        } catch(e) {
+            console.error('Nepi Jano: error', e);
+        }
+    };
+    var allowArticle = function(articleId) {
+        function createUUID() {
+            var s = [];
+            var hexDigits = "0123456789abcdef";
+            for (var i = 0; i < 40; i++) {
+                s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+            }
+            var uuid = s.join("");
+            return uuid;
+        }
+
+
+        $('#article_text').attr('style', '-webkit-transition: all 1s ease-in-out');
+        $('#article_text').attr('style', '-webkit-filter: blur(8px);');
+        var url = 'http://www.etrend.sk/services/IphoneAppDict.html?deviceType=1&device=' + createUUID() + '&quality=hi&queryType=articleDetail&uid=' + articleId;
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = handleStateChange;
+        xhr.open("GET", url, true);
+        xhr.send();
+        function handleStateChange() {
+            if (xhr.readyState === 4) {
+                try {
+                    var xml = $.parseXML(xhr.responseText);
+                    var $xml = $(xml)
+                    var article = $xml.find('string');
+                    //if exists then replace piano content...
+                    if (article.length > 0) {
+                        $('#article_text').html($('<div/>').html(article).text());
+                    }
+                } catch(e) {
+                    console.error('Nepi Jano: error', e);
+                }
+                var t = setTimeout(function() {
+                    $('#article_text').attr('style', '-webkit-filter: blur(0px);');
+                }, 500);
+            }
+        }
+
+    }
+    return {
+        init : init
+    }
+})();
+
+/**
+ * loader for diffrent pages
+ */
+//sme.sk
 if (/sme.sk\//i.test(document.location)) {
     sme.init();
 }
+//hnonline.sk
 if (/hnonline.sk\//i.test(document.location)) {
     hn.init();
+}
+//etrend.sk
+if (/etrend.sk\//i.test(document.location)) {
+    etrend.init();
 }
