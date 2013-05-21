@@ -1,7 +1,7 @@
 {
 	"name": "Nepi Jano!",
 	"description": "This extension allows to read paid content on www.sme.sk, www.hnonline.sk and www.etrend.sk.",
-	"version": "0.9.4",
+	"version": "0.9.5",
 	"manifest_version": 2,
 	"permissions": ["webRequest", "webRequestBlocking", "*://*.sme.sk/*"],
 	"background": {

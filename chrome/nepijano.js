@@ -1,7 +1,7 @@
 /**
  * @fileOverview Nepi Jano Google Chrome extension
  * @author Miroslav Magda, http://blog.ejci.net
- * @version 0.9.4
+ * @version 0.9.5
  */
 
 /**
@@ -246,13 +246,22 @@ var hn = (function() {
                     $('#body_inhalt .detail-text').html($('<div/>').html(article).text());
                     }
                     */
-                    //new sollution :)
-                    $xml.find('article').each(function() {
+                    //sollution from 2013.05.19 was fixed by hnonline.sk developers
+                    /*$xml.find('article').each(function() {
                         var url = $(this).find('url').text();
                         if (url.split('-')[1] == (''+document.location).split('-')[1]) {
                             $('#body_inhalt .detail-text').html($('<div/>').html($(this).find('body')).text());
                         }
-                    });
+                    });*/
+                    //new sollution :)
+                    //hint to hnonline.sk developers: use oAuth ;) 
+                    var titleWeb=$('#body_inhalt h1').text();
+                    $xml.find('article').each(function() {
+                        var titleXml = $(this).find('title').text();
+                        if ($.trim(titleXml)===$.trim(titleWeb)) {
+                            $('#body_inhalt .detail-text').html($('<div/>').html($(this).find('body')).text());
+                        }
+                    })
                 } catch(e) {
                     console.error('Nepi Jano: error', e);
                 }

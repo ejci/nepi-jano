@@ -1,7 +1,7 @@
 /**
  * @fileOverview Nepi Jano Google Chrome extension
  * @author Miroslav Magda, http://blog.ejci.net
- * @version 0.9.4
+ * @version 0.9.5
  */
 
 /**
