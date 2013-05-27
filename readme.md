@@ -15,9 +15,7 @@ Before instalation make sure that you uninstalled older version of this extensio
 Just install extension and click on some paid link on [www.sme.sk](http://www.sme.sk) and wait for it...
 
 ##How it works
-Read my blog posts about it:
-* [2013.04.21](http://blog.ejci.net/2013/04/21/piano-and-sme-sk/)
-* [2013.05.19](http://blog.ejci.net/2013/05/19/paid-content-for-free-on-slovak-news-portals/)
+Read my blog posts about it: [2013.04.21](http://blog.ejci.net/2013/04/21/piano-and-sme-sk/), [2013.05.19](http://blog.ejci.net/2013/05/19/paid-content-for-free-on-slovak-news-portals/)
 
 
 ##Disclaimer
