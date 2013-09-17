@@ -4,7 +4,7 @@ Nepi Jano! Google Chrome extension
 Nepi Jano! is a Google Chrome extension that allows to use paid features on [www.sme.sk](http://www.sme.sk), [www.hnonline.sk](http://hnonline.sk/) or [www.etrend.sk](http://etrend.sk/).
  
 ##Instalation
-* [Download extension](https://bitbucket.org/miroslavmagda/nepi-jano/downloads/nepi_jano_0.9.5.crx.zip) (.zip)
+* [Download extension](http://lab.ejci.net/nepi_jano_0.9.5.crx.zip) (.zip)
 * Unzip downloaded file (.crx)
 * Type chrome://extensions in your Google Chrome browser
 * Drag and drop unziped (.crx) file to Google Chrome extensions tab
