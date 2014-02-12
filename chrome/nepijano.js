@@ -105,7 +105,7 @@ var sme = (function() {
                             $('.video').prepend('<video src="' + $($('.video .iosvideo a')[0]).attr('href') + '" controls poster="' + $($('.video .iosvideo img')[0]).attr('src') + '" width="640" height="360">');
                             $('.video .tv-video').hide();
                             var t = setTimeout(function() {
-                                $('.video').attr('style', '-webkit-filter: blur(0px);');
+                                $('.video').attr('style', '-webkit-filter: none;');
                             }, 500);
 
                         }
