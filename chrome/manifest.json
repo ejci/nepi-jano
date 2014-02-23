@@ -1,7 +1,7 @@
 {
 	"name": "Nepi Jano!",
-	"description": "This extension allows to read paid content on www.sme.sk, www.hnonline.sk and www.etrend.sk.",
-	"version": "0.9.5",
+	"description": "This extension allows to read paid content on www.sme.sk.",
+	"version": "0.9.6",
 	"manifest_version": 2,
 	"permissions": ["webRequest", "webRequestBlocking", "*://*.sme.sk/*"],
 	"background": {
@@ -10,15 +10,10 @@
 	"content_scripts": [
 		{
 			"js": ["lib/jquery-2.0.0.min.js", "nepijano.js"],
-			"matches": ["*://*.sme.sk/*", "*://*.hnonline.sk/*", "*://*.etrend.sk/*"]
+			"matches": ["*://*.sme.sk/*"]
 		}
 	],
-	"app": {
-		"launch": {
-			"local_path": "app.html"
-		}
-	},
-	"homepage_url": "https://bitbucket.org/miroslavmagda/nepi-jano",
+	"homepage_url": "https://github.com/ejci/nepi-jano",
 	"icons": {
 		"16": "icon_16.png",
 		"48": "icon_48.png",
