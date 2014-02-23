@@ -1,10 +1,10 @@
 Nepi Jano! Google Chrome extension 
 =======
 
-Nepi Jano! is a Google Chrome extension that allows to use paid features on [www.sme.sk](http://www.sme.sk), [www.hnonline.sk](http://hnonline.sk/) or [www.etrend.sk](http://etrend.sk/).
+Nepi Jano! is a Google Chrome extension that allows to use paid features on [www.sme.sk](http://www.sme.sk)~~, [www.hnonline.sk](http://hnonline.sk/) or [www.etrend.sk](http://etrend.sk/)~~.
  
-##Instalation
-* [Download extension](http://lab.ejci.net/nepi_jano_0.9.5.crx.zip) (.zip)
+##Instalation / Update
+* [Download extension](http://lab.ejci.net/nepi_jano_0.9.6.crx.zip) (.zip)
 * Unzip downloaded file (.crx)
 * Type chrome://extensions in your Google Chrome browser
 * Drag and drop unziped (.crx) file to Google Chrome extensions tab
@@ -25,13 +25,16 @@ Buy [Piano](http://www.pianomedia.sk) subscription. You wil save hungry children
 
 Author: [Miroslav Magda](http://ejci.net)
 
-Version: 0.9.5
+Version: 0.9.6
 
 ##License
 All code is open source and dual licensed under GPL and MIT. Check the individual licenses for more information.
 
 
 ###Change log
+####0.9.6
+* Code cleanup 
+
 ####0.9.5
 * another fix for hnonline.sk 
 
