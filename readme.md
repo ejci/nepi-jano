@@ -9,7 +9,6 @@ Nepi Jano! is a Google Chrome extension that allows to use paid features on [www
 * Type chrome://extensions in your Google Chrome browser
 * Drag and drop unziped (.crx) file to Google Chrome extensions tab
 
-Before instalation make sure that you uninstalled older version of this extension (if you have it).
 
 ##How to use it
 Just install extension and click on some paid link on [www.sme.sk](http://www.sme.sk) and wait for it...
