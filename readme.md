@@ -16,7 +16,7 @@ Nepi Jano! is a extension for Google Chrome and Safari that allows to use paid f
 * Enojy
 
 ##Installation / Update Firefox
-* [Download addon](https://drive.google.com/file/d/0B7QCPt9ILEZWQUlDQ2xOQTdHLXc)
+* [Download addon](https://drive.google.com/file/d/0B7QCPt9ILEZWVDVTcS1YT3RVLUU)
 * New Tab -> Open File ... (Ctrl+O)
 * Select the downloaded addon (.xpi)
 * Press Install Now
