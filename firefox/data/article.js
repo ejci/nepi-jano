@@ -14,7 +14,7 @@ self.port.on("rewritePage", function(text) {
 	utils.remove(itext_content.querySelector(".topfoto"));
 	utils.remove(itext_content.querySelector(".discus"));
 
-	// remove annoying SME Andoid app banners
+	// remove annoying SME Android app banners
 	var apps = itext_content.querySelectorAll('a[href="market://details?id=sk.sme.android.reader"]');
 	for (var i = 0; i < apps.length; i++) {
 		utils.remove(apps[i].parentNode);
