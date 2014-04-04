@@ -2,10 +2,6 @@ Nepi Jano! extension
 =======
 
 Nepi Jano! is a extension for Google Chrome and Safari that allows to use paid features on [www.sme.sk](http://www.sme.sk).
-
-#####Contrubitors
-* [Viliam Pucik](https://github.com/viliampucik) - Extension for Firefox
-* [Jakub Zitny](https://github.com/jakubzitny) - Extension for Safari
  
 ##Instalation / Update Google Chrome
 * [Download extension](https://github.com/ejci/nepi-jano/raw/master/releases/nepi_jano_0.9.6.crx.zip) (.zip)
@@ -31,16 +27,23 @@ Just install extension and click on some paid link on [www.sme.sk](http://www.sm
 ##How it works
 Read my blog posts about it: [2013.04.21](http://blog.ejci.net/2013/04/21/piano-and-sme-sk/), [2013.05.19](http://blog.ejci.net/2013/05/19/paid-content-for-free-on-slovak-news-portals/)
 
-
+---
 ##Disclaimer
 This extension was made only for test purposes.
 Buy [Piano](http://www.pianomedia.sk) subscription. You wil save hungry children in Africa! Seriously. Don't be an asshole and buy subscription.
 
+---
+#####Version
+* 0.9.6
 
-Author: [Miroslav Magda](http://ejci.net)
+#####Author
+* [Miroslav Magda](http://ejci.net)
 
-Version: 0.9.6
+#####Contrubitors
+* [Viliam Pucik](https://github.com/viliampucik) - Extension for Firefox
+* [Jakub Zitny](https://github.com/jakubzitny) - Extension for Safari
 
+---
 
 ##License
 All code is open source and dual licensed under GPL and MIT. Check the individual licenses for more information.
