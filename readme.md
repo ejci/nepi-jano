@@ -1,25 +1,29 @@
 Nepi Jano! extension
 =======
 
-Nepi Jano! is a extension for Google Chrome and Safari that allows to use paid features on [www.sme.sk](http://www.sme.sk)~~, [www.hnonline.sk](http://hnonline.sk/) or [www.etrend.sk](http://etrend.sk/)~~.
+Nepi Jano! is a extension for Google Chrome and Safari that allows to use paid features on [www.sme.sk](http://www.sme.sk).
+
+#####Contrubitors
+* [Viliam Pucik](https://github.com/viliampucik) - Extension for Firefox
+* [Jakub Zitny](https://github.com/jakubzitny) - Extension for Safari
  
 ##Instalation / Update Google Chrome
-* [Download extension](http://lab.ejci.net/nepi_jano_0.9.6.crx.zip) (.zip)
+* [Download extension](https://github.com/ejci/nepi-jano/raw/master/releases/nepi-jano_0.9.6.crx.zip) (.zip)
 * Unzip downloaded file (.crx)
 * Type chrome://extensions in your Google Chrome browser
 * Drag and drop unziped (.crx) file to Google Chrome extensions tab
 
-##Instalation / Update Safari
-* [Download extension](http://taiwan.zitny.eu/nepi-jano.safariextz)
-* Doubleclick the downloaded .safariextz file
-* Pres Install
-* Enojy
-
 ##Installation / Update Firefox
-* [Download addon](https://drive.google.com/file/d/0B7QCPt9ILEZWVDVTcS1YT3RVLUU)
+* [Download addon](https://github.com/ejci/nepi-jano/raw/master/releases/nepi-jano_0.9.6.xpi)
 * New Tab -> Open File ... (Ctrl+O)
 * Select the downloaded addon (.xpi)
 * Press Install Now
+
+##Instalation / Update Safari
+* [Download extension](https://github.com/ejci/nepi-jano/raw/master/releases/nepi-jano_0.9.6.safariextz) (.safariextz)
+* Doubleclick the downloaded .safariextz file
+* Pres Install
+* Enojy
 
 ##How to use it
 Just install extension and click on some paid link on [www.sme.sk](http://www.sme.sk) and wait for it...
@@ -35,15 +39,15 @@ Buy [Piano](http://www.pianomedia.sk) subscription. You wil save hungry children
 
 Author: [Miroslav Magda](http://ejci.net)
 
-Version: 0.9.7
+Version: 0.9.6
+
 
 ##License
 All code is open source and dual licensed under GPL and MIT. Check the individual licenses for more information.
 
 
 ###Change log
-####0.9.7
-* added Safari port
+
 
 ####0.9.6
 * Code cleanup 
