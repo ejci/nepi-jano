@@ -31,7 +31,8 @@ self.port.on("rewritePage", function(text) {
 // check for piano content (message)
 var itext_content = document.getElementById("itext_content");
 if (null != itext_content
-	&& (null != itext_content.querySelector(".art-nexttext-piano")
+	&& (null != itext_content.querySelector("div[id^=pianoArticle]")
+		|| null != itext_content.querySelector(".art-nexttext-piano")
 		|| null != itext_content.querySelector(".art-perex-piano"))) {
 	var articleId = utils.articleId();
 	if (articleId) {
