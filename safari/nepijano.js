@@ -8,17 +8,17 @@
  * moved from sme to be accessible from message handler
  */
 function urlParam(name, url) {
-  url = (url) ? url : window.location.href;
-  name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-  var regexS = "[\\?&]" + name + "=([^&#]*)";
-  var regex = new RegExp(regexS);
-  var results = regex.exec(url);
-  if (results === null) {
-  	return false;
-  } else {
-  	return results[1];
-  }
-  return false;
+	url = (url) ? url : window.location.href;
+	name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+	var regexS = "[\\?&]" + name + "=([^&#]*)";
+	var regex = new RegExp(regexS);
+	var results = regex.exec(url);
+	if (results === null) {
+		return false;
+	} else {
+		return results[1];
+	}
+	return false;
 };
 
 /**
@@ -28,31 +28,31 @@ function urlParam(name, url) {
  * @since Mon Mar 17 00:35:36 HKT 2014
  */
 function getAnswer(theMessageEvent) {
-  if (theMessageEvent.name === "article") {
-    data = theMessageEvent.message;
-    //remove javascript from response
-    data = data.replace(/<script/g, '<!--script');
-    data = data.replace(/<\/script/g, '</script--');
-    //some magic
-    $('#article-box #itext_content').html(data);
-    $('#article-box #itext_content h1').hide();
-    $('#article-box #itext_content small').hide();
-    $('#article-box #itext_content h1').next().hide();
-    $('#article-box #itext_content .topfoto').hide();
-    $('#article-box #itext_content .discus').hide();
-    $('#article-box #itext_content link').remove();
-    $('#article-box #itext_content style').remove();
-    $('#article-box a').each(function(index) {
-      var url = $(this).attr('href');
-      var cId = urlParam('c', $(this).attr('href'));
-      if (/s.sme.sk\//i.test(url) && cId) {
-          $(this).attr('href', 'http://www.sme.sk/c/' + cId + '/');
-      }
-    });
-    var t = setTimeout(function() {
-        $('#article-box #itext_content').attr('style', '-webkit-filter: none;');
-    }, 500);
-  }
+	if (theMessageEvent.name === "article") {
+		data = theMessageEvent.message;
+		//remove javascript from response
+		data = data.replace(/<script/g, '<!--script');
+		data = data.replace(/<\/script/g, '</script--');
+		//some magic
+		$('#article-box #itext_content').html(data);
+		$('#article-box #itext_content h1').hide();
+		$('#article-box #itext_content small').hide();
+		$('#article-box #itext_content h1').next().hide();
+		$('#article-box #itext_content .topfoto').hide();
+		$('#article-box #itext_content .discus').hide();
+		$('#article-box #itext_content link').remove();
+		$('#article-box #itext_content style').remove();
+		$('#article-box a').each(function(index) {
+			var url = $(this).attr('href');
+			var cId = urlParam('c', $(this).attr('href'));
+			if (/s.sme.sk\//i.test(url) && cId) {
+				$(this).attr('href', 'http://www.sme.sk/c/' + cId + '/');
+			}
+		});
+		var t = setTimeout(function() {
+			$('#article-box #itext_content').attr('style', '-webkit-filter: none;');
+		}, 500);
+	}
 }
 
 safari.self.addEventListener("message", getAnswer, false);
@@ -163,7 +163,9 @@ var sme = (function() {
 			//this is not pretty but who cares
 			var isPiano1 = ($('#article-box #itext_content .art-perex-piano').length != 0);
 			var isPiano2 = ($('#article-box #itext_content .art-nexttext-piano').length != 0);
-			if (isPiano1 || isPiano2) {
+			//quick fix for changes at sme 16.05.2014
+			var isPiano3 = ($('#article-box div[id^=pianoArticle]').length != 0);
+			if (isPiano1 || isPiano2 || isPiano3) {
 				//console.log('Nepi Jano: Changing content :) ');
 				var articleId = utils.articleId();
 				if (articleId) {
@@ -172,7 +174,7 @@ var sme = (function() {
 					$('#article-box #itext_content').attr('style', '-webkit-filter: blur(8px);');
 					//get article id from URL
 					var url = 'http://s.sme.sk/export/phone/html/?cf=' + articleId;
-                    safari.self.tab.dispatchMessage("doXhr", url);
+					safari.self.tab.dispatchMessage("doXhr", url);
 				}
 			}
 		} catch(e) {

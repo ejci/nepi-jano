@@ -22,7 +22,9 @@ self.port.on("rewritePage", function(text) {
 //this is not pretty but who cares
 var isPiano1 = ($('#article-box #itext_content .art-perex-piano').length != 0);
 var isPiano2 = ($('#article-box #itext_content .art-nexttext-piano').length != 0);
-if (isPiano1 || isPiano2) {
+//quick fix for changes at sme 16.05.2014
+var isPiano3 = ($('#article-box div[id^=pianoArticle]').length != 0);
+if (isPiano1 || isPiano2 || isPiano3) {
 	var articleId = utils.articleId();
 	if (articleId) {
 		self.port.emit('loadPage', articleId);
