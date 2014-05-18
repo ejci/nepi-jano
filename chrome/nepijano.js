@@ -1,7 +1,7 @@
 /**
  * @fileOverview Nepi Jano Google Chrome extension
  * @author Miroslav Magda, http://blog.ejci.net
- * @version 0.9.6
+ * @version 0.9.6.1
  */
 
 /**
@@ -126,7 +126,9 @@ var sme = (function() {
 			//this is not pretty but who cares
 			var isPiano1 = ($('#article-box #itext_content .art-perex-piano').length != 0);
 			var isPiano2 = ($('#article-box #itext_content .art-nexttext-piano').length != 0);
-			if (isPiano1 || isPiano2) {
+			//quick fix for changes at sme 16.05.2014
+			var isPiano3 = ($('#article-box div[id^=pianoArticle]').length != 0);
+			if (isPiano1 || isPiano2 || isPiano3) {
 				//console.log('Nepi Jano: Changing content :) ');
 				var articleId = utils.articleId();
 				if (articleId) {
