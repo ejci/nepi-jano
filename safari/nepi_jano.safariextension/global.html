@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<script type="text/javascript">
+			function doXhr(url, event) {
+				console.log('url', url);
+				var xhr = new XMLHttpRequest();
+				xhr.onreadystatechange = handleStateChange;
+				xhr.open("GET", url, true);
+				xhr.send();
+				function handleStateChange() {
+					if (xhr.readyState === 4) {
+						console.log('responseText', xhr.responseText);
+						var data = xhr.responseText;
+						event.target.page.dispatchMessage("article", data);
+					}
+				}
+
+			}
+
+			function respondToMessage(theMessageEvent) {
+				if (theMessageEvent.name === "doXhr") {
+					var url = theMessageEvent.message;
+					doXhr(url, theMessageEvent);
+				}
+			}
+
+
+			safari.application.addEventListener("message", respondToMessage, false);
+		</script>
+	</head>
+	<body></body>
+</html>

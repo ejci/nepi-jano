@@ -1,7 +1,7 @@
 /**
  * @fileOverview Nepi Jano Google Chrome extension
  * @author Miroslav Magda, http://blog.ejci.net
- * @version 0.9.6
+ * @version 0.9.7
  */
 
 /**
@@ -36,22 +36,19 @@ function getAnswer(theMessageEvent) {
 		//some magic
 		$('#article-box #itext_content').html(data);
 		$('#article-box #itext_content h1').hide();
-		$('#article-box #itext_content small').hide();
-		$('#article-box #itext_content h1').next().hide();
 		$('#article-box #itext_content .topfoto').hide();
 		$('#article-box #itext_content .discus').hide();
 		$('#article-box #itext_content link').remove();
 		$('#article-box #itext_content style').remove();
 		$('#article-box a').each(function(index) {
+			//change s.sme.sk/export/phone/?c=XXX to www.sme.sk/c/XXX/
 			var url = $(this).attr('href');
-			var cId = urlParam('c', $(this).attr('href'));
+			var cId = utils.urlParam('c', $(this).attr('href'));
 			if (/s.sme.sk\//i.test(url) && cId) {
 				$(this).attr('href', 'http://www.sme.sk/c/' + cId + '/');
 			}
 		});
-		var t = setTimeout(function() {
-			$('#article-box #itext_content').attr('style', '-webkit-filter: none;');
-		}, 500);
+
 	}
 }
 
@@ -118,9 +115,6 @@ var sme = (function() {
 				//console.log('Nepi Jano: Changing content :) ');
 				var articleId = utils.articleId();
 				if (articleId) {
-					//css3 "magic"
-					$('.video').attr('style', '-webkit-transition: all 1s ease-in-out');
-					$('.video').attr('style', '-webkit-filter: blur(8px);');
 					//get article id from URL
 					var url = 'http://s.sme.sk/export/phone/html/?vf=' + articleId;
 					var xhr = new XMLHttpRequest();
@@ -140,9 +134,6 @@ var sme = (function() {
 							$('.v-podcast-box').remove();
 							$('.video').prepend('<video src="' + $($('.video .iosvideo a')[0]).attr('href') + '" controls poster="' + $($('.video .iosvideo img')[0]).attr('src') + '" width="640" height="360">');
 							$('.video .tv-video').hide();
-							var t = setTimeout(function() {
-								$('.video').attr('style', '-webkit-filter: none;');
-							}, 500);
 
 						}
 					}
@@ -169,9 +160,6 @@ var sme = (function() {
 				//console.log('Nepi Jano: Changing content :) ');
 				var articleId = utils.articleId();
 				if (articleId) {
-					//css3 "magic"
-					$('#article-box #itext_content').attr('style', '-webkit-transition: all 1s ease-in-out');
-					$('#article-box #itext_content').attr('style', '-webkit-filter: blur(8px);');
 					//get article id from URL
 					var url = 'http://s.sme.sk/export/phone/html/?cf=' + articleId;
 					safari.self.tab.dispatchMessage("doXhr", url);

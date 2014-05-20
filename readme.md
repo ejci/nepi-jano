@@ -15,11 +15,10 @@ Nepi Jano! is a extension for Google Chrome and Safari that allows to use paid f
 * Select the downloaded addon (.xpi)
 * Press Install Now
 
-##Instalation / Update Safari (0.9.6)
-* [Download extension](https://github.com/ejci/nepi-jano/raw/master/releases/nepi-jano_0.9.6.safariextz) (.safariextz)
+##Instalation / Update Safari (0.9.7)
+* [Download extension](https://github.com/ejci/nepi-jano/raw/master/releases/nepi-jano_0.9.7.safariextz) (.safariextz)
 * Doubleclick the downloaded .safariextz file
 * Pres Install
-* Enojy
 
 ##How to use it
 Just install extension and click on some paid link on [www.sme.sk](http://www.sme.sk) and wait for it...
@@ -34,7 +33,7 @@ Buy [Piano](http://www.pianomedia.sk) subscription. You wil save hungry children
 
 ---
 #####Version
-* 0.9.6
+* 0.9.7
 
 #####Author
 * [Miroslav Magda](http://ejci.net)
