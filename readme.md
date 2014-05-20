@@ -3,19 +3,19 @@ Nepi Jano! extension
 
 Nepi Jano! is a extension for Google Chrome and Safari that allows to use paid features on [www.sme.sk](http://www.sme.sk).
  
-##Instalation / Update Google Chrome
+##Instalation / Update Google Chrome (0.9.7)
 * [Download extension](https://github.com/ejci/nepi-jano/raw/master/releases/nepi_jano_0.9.7.crx.zip) (.zip)
 * Unzip downloaded file (.crx)
 * Type chrome://extensions in your Google Chrome browser
 * Drag and drop unziped (.crx) file to Google Chrome extensions tab
 
-##Installation / Update Firefox
-* [Download addon](https://github.com/ejci/nepi-jano/raw/master/releases/nepi-jano_0.9.6.xpi)
+##Installation / Update Firefox (0.9.7)
+* [Download addon](https://github.com/ejci/nepi-jano/raw/master/releases/nepi-jano_0.9.7.xpi)
 * New Tab -> Open File ... (Ctrl+O)
 * Select the downloaded addon (.xpi)
 * Press Install Now
 
-##Instalation / Update Safari
+##Instalation / Update Safari (0.9.6)
 * [Download extension](https://github.com/ejci/nepi-jano/raw/master/releases/nepi-jano_0.9.6.safariextz) (.safariextz)
 * Doubleclick the downloaded .safariextz file
 * Pres Install
