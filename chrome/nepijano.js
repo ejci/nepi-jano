@@ -151,7 +151,7 @@ var sme = (function() {
 							//some magic
 							$('#article-box #itext_content').html(data);
 
-							//remove android buddle
+							//remove android elements
 							$('#article-box #itext_content div[style="background-color: #EEE; padding: 10px; text-align: center; font-family: Arial; margin-bottom: 8px;"]').remove();
 
 							//improve video container
