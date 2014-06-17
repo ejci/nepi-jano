@@ -151,7 +151,10 @@ var sme = (function() {
 							//some magic
 							$('#article-box #itext_content').html(data);
 
+							//remove android buddle
 							$('#article-box #itext_content div[style="background-color: #EEE; padding: 10px; text-align: center; font-family: Arial; margin-bottom: 8px;"]').remove();
+
+							//improve video container
 							$('#article-box #itext_content .iosvideo').css({'position': 'relative'});
 							$('#article-box #itext_content img').css({'max-width': '100%'});
 							$('#article-box #itext_content .iosplaybtn img').css({
@@ -161,7 +164,6 @@ var sme = (function() {
 								'margin-left': '-95px',
 								'margin-top': '-40px'
 							});
-
 
 							$('#article-box #itext_content h1').hide();
 							$('#article-box #itext_content .topfoto').hide();
