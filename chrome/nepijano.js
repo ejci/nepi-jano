@@ -1,7 +1,7 @@
 /**
  * @fileOverview Nepi Jano Google Chrome extension
  * @author Miroslav Magda, http://blog.ejci.net
- * @version 0.9.6
+ * @version 0.9.6.1
  */
 
 /**
@@ -126,7 +126,9 @@ var sme = (function() {
 			//this is not pretty but who cares
 			var isPiano1 = ($('#article-box #itext_content .art-perex-piano').length != 0);
 			var isPiano2 = ($('#article-box #itext_content .art-nexttext-piano').length != 0);
-			if (isPiano1 || isPiano2) {
+			//quick fix for changes at sme 16.05.2014
+			var isPiano3 = ($('#article-box div[id^=pianoArticle]').length != 0);
+			if (isPiano1 || isPiano2 || isPiano3) {
 				//console.log('Nepi Jano: Changing content :) ');
 				var articleId = utils.articleId();
 				if (articleId) {
@@ -148,6 +150,21 @@ var sme = (function() {
 							data = data.replace(/<\/script/g, '</script--');
 							//some magic
 							$('#article-box #itext_content').html(data);
+
+							//remove android elements
+							$('#article-box #itext_content div[style="background-color: #EEE; padding: 10px; text-align: center; font-family: Arial; margin-bottom: 8px;"]').remove();
+
+							//improve video container
+							$('#article-box #itext_content .iosvideo').css({'position': 'relative'});
+							$('#article-box #itext_content img').css({'max-width': '100%'});
+							$('#article-box #itext_content .iosplaybtn img').css({
+								'position': 'absolute',
+								'top': '50%',
+								'left': '50%',
+								'margin-left': '-95px',
+								'margin-top': '-40px'
+							});
+
 							$('#article-box #itext_content h1').hide();
 							$('#article-box #itext_content .topfoto').hide();
 							$('#article-box #itext_content .discus').hide();

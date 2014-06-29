@@ -3,23 +3,32 @@ Nepi Jano! extension
 
 Nepi Jano! is a extension for Google Chrome and Safari that allows to use paid features on [www.sme.sk](http://www.sme.sk).
  
-##Instalation / Update Google Chrome
-* [Download extension](https://github.com/ejci/nepi-jano/raw/master/releases/nepi_jano_0.9.6.crx.zip) (.zip)
+##Instalation / Update Google Chrome (0.9.7)
+* [Download extension](https://github.com/ejci/nepi-jano/raw/master/releases/nepi_jano_0.9.7.crx.zip) (.zip)
 * Unzip downloaded file (.crx)
 * Type chrome://extensions in your Google Chrome browser
 * Drag and drop unziped (.crx) file to Google Chrome extensions tab
 
-##Installation / Update Firefox
-* [Download addon](https://github.com/ejci/nepi-jano/raw/master/releases/nepi-jano_0.9.6.xpi)
+###Alternative guide for Chrome 35+ on Windows
+* [Download extension](https://github.com/ejci/nepi-jano/raw/master/releases/nepi_jano_0.9.7.crx.zip) (.zip)
+* Unzip downloaded file (.crx)
+* Change file extension from .crx to .zip
+* Unpack .zip file
+* Type chrome://extensions in your Google Chrome browser
+* Enable "*Developer mode*"
+* "*Load unpacked extension...*" from folder where you unpacked the extension
+
+
+##Installation / Update Firefox (0.9.7)
+* [Download addon](https://github.com/ejci/nepi-jano/raw/master/releases/nepi-jano_0.9.7.xpi)
 * New Tab -> Open File ... (Ctrl+O)
 * Select the downloaded addon (.xpi)
 * Press Install Now
 
-##Instalation / Update Safari
-* [Download extension](https://github.com/ejci/nepi-jano/raw/master/releases/nepi-jano_0.9.6.safariextz) (.safariextz)
+##Instalation / Update Safari (0.9.7)
+* [Download extension](https://github.com/ejci/nepi-jano/raw/master/releases/nepi-jano_0.9.7.safariextz) (.safariextz)
 * Doubleclick the downloaded .safariextz file
 * Pres Install
-* Enojy
 
 ##How to use it
 Just install extension and click on some paid link on [www.sme.sk](http://www.sme.sk) and wait for it...
@@ -34,7 +43,7 @@ Buy [Piano](http://www.pianomedia.sk) subscription. You wil save hungry children
 
 ---
 #####Version
-* 0.9.6
+* 0.9.7
 
 #####Author
 * [Miroslav Magda](http://ejci.net)
@@ -42,6 +51,7 @@ Buy [Piano](http://www.pianomedia.sk) subscription. You wil save hungry children
 #####Contrubitors
 * [Viliam Pucik](https://github.com/viliampucik) - Extension for Firefox
 * [Jakub Zitny](https://github.com/jakubzitny) - Extension for Safari
+* [Daniel Husar](https://github.com/danielhusar) - Various fixes
 
 ---
 
@@ -51,6 +61,8 @@ All code is open source and dual licensed under GPL and MIT. Check the individua
 
 ###Change log
 
+####0.9.7
+* Update for sme.sk redesign
 
 ####0.9.6
 * Code cleanup 

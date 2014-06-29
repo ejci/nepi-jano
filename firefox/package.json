@@ -4,9 +4,9 @@
   "id": "nepi-jano@viliampucik",
   "description": "Read paid content on www.sme.sk",
   "author": "Miroslav Magda, Viliam Pucik",
-  "homepage": "https://github.com/viliampucik/nepi-jano",
+  "homepage": "https://github.com/ejci/nepi-jano",
   "license": "MPL 2.0",
-  "version": "0.3.1",
+  "version": "0.9.7",
   "permissions": {
     "cross-domain-content": ["http://s.sme.sk/"]
   }
