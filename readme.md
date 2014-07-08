@@ -13,7 +13,7 @@ Nepi Jano! is a extension for Google Chrome and Safari that allows to use paid f
 * [Download extension](https://github.com/ejci/nepi-jano/raw/master/releases/nepi_jano_0.9.7.crx.zip) (.zip)
 * Unzip downloaded file (.crx)
 * Change file extension from .crx to .zip
-* Unpack .zip file
+* Unpack .zip file (use [7-zip](http://www.7-zip.org/download.html) if Windows complains about invalid archive)
 * Type chrome://extensions in your Google Chrome browser
 * Enable "*Developer mode*"
 * "*Load unpacked extension...*" from folder where you unpacked the extension
