@@ -10,10 +10,8 @@ Nepi Jano! is a extension for Google Chrome and Safari that allows to use paid f
 * Drag and drop unziped (.crx) file to Google Chrome extensions tab
 
 ###Alternative guide for Chrome 35+ on Windows
-* [Download extension](https://github.com/ejci/nepi-jano/raw/master/releases/nepi_jano_0.9.7.crx.zip) (.zip)
-* Unzip downloaded file (.crx)
-* Change file extension from .crx to .zip
-* Unpack .zip file
+* [Download extension](https://github.com/ejci/nepi-jano/raw/master/releases/nepi_jano_0.9.7.zip) (.zip)
+* Unzip downloaded file (.zip)
 * Type chrome://extensions in your Google Chrome browser
 * Enable "*Developer mode*"
 * "*Load unpacked extension...*" from folder where you unpacked the extension
