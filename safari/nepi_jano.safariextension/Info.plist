@@ -5,15 +5,15 @@
 	<key>Author</key>
 	<string>Miroslav Magda, Jakub Zitny</string>
 	<key>Builder Version</key>
-	<string>9537.75.14</string>
+	<string>9537.78.2</string>
 	<key>CFBundleDisplayName</key>
 	<string>Nepi Jano!</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.ejci.nepijano</string>
+	<string>com.ejci.nepi-jano</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.9.7</string>
+	<string>0.9.8</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>Chrome</key>
@@ -27,7 +27,7 @@
 		<dict>
 			<key>End</key>
 			<array>
-				<string>lib/jquery-2.0.0.min.js</string>
+				<string>lib/jquery-2.1.1.min.js</string>
 				<string>nepijano.js</string>
 			</array>
 		</dict>
@@ -43,12 +43,18 @@
 			<key>Allowed Domains</key>
 			<array>
 				<string>*.sme.sk</string>
+				<string>*.tyzden.sk</string>
+				<string>*.foreignpolicy.com</string>
 			</array>
+			<key>Include Secure Pages</key>
+			<true/>
 			<key>Level</key>
 			<string>Some</string>
 		</dict>
 	</dict>
+	<key>Update Manifest URL</key>
+	<string>http://taiwan.zitny.eu/nepi-jano-update.plist</string>
 	<key>Website</key>
-	<string>https://github.com/ejci/nepi-jano/</string>
+	<string>https://github.com/ejci/nepi-jano</string>
 </dict>
 </plist>
