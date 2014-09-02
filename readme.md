@@ -23,8 +23,8 @@ Nepi Jano! is a extension for Google Chrome and Safari that allows to use paid f
 * Select the downloaded addon (.xpi)
 * Press Install Now
 
-##Instalation / Update Safari (0.9.7)
-* [Download extension](https://github.com/ejci/nepi-jano/raw/master/releases/nepi-jano_0.9.7.safariextz) (.safariextz)
+##Instalation / Update Safari (0.9.8)
+* [Download extension](https://github.com/ejci/nepi-jano/raw/master/releases/nepi-jano_0.9.8.safariextz) (.safariextz)
 * Doubleclick the downloaded .safariextz file
 * Pres Install
 
@@ -41,7 +41,7 @@ Buy [Piano](http://www.pianomedia.sk) subscription. You wil save hungry children
 
 ---
 #####Version
-* 0.9.7
+* 0.9.8
 
 #####Author
 * [Miroslav Magda](http://ejci.net)
@@ -58,6 +58,9 @@ All code is open source and dual licensed under GPL and MIT. Check the individua
 
 
 ###Change log
+
+####0.9.8
+* Added tyzden.sk Piano videos and foreignpolicy.com articles to Safari
 
 ####0.9.7
 * Update for sme.sk redesign
