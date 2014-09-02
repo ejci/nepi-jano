@@ -24,6 +24,7 @@ Nepi Jano! is a extension for Google Chrome and Safari that allows to use paid f
 * Press Install Now
 
 ##Instalation / Update Safari (0.9.8)
+* Uninstall the previous version if you have it: Safari -> Preferences -> Extensions -> Nepi Jano! -> Uninstall
 * [Download extension](https://github.com/ejci/nepi-jano/raw/master/releases/nepi-jano_0.9.8.safariextz) (.safariextz)
 * Doubleclick the downloaded .safariextz file
 * Pres Install
