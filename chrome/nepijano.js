@@ -128,7 +128,8 @@ var sme = (function() {
 			var isPiano2 = ($('#article-box #itext_content .art-nexttext-piano').length != 0);
 			//quick fix for changes at sme 16.05.2014
 			var isPiano3 = ($('#article-box div[id^=pianoArticle]').length != 0);
-			if (isPiano1 || isPiano2 || isPiano3) {
+			var isPiano4 = (typeof pianoArticles == 'string') && pianoArticles != '';
+			if (isPiano1 || isPiano2 || isPiano3 || isPiano4) {
 				//console.log('Nepi Jano: Changing content :) ');
 				var articleId = utils.articleId();
 				if (articleId) {
