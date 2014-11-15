@@ -1,32 +1,41 @@
 self.port.on("rewritePage", function(text) {
-	//remove javascript from response
-	text = text.replace(/<script/g, '<!--script');
-	text = text.replace(/<\/script/g, '</script--');
-	//some magic
-	$('#article-box #itext_content').html(text);
-	$('#article-box #itext_content h1').hide();
-	$('#article-box #itext_content .topfoto').hide();
-	$('#article-box #itext_content .discus').hide();
-	$('#article-box #itext_content link').remove();
-	$('#article-box #itext_content style').remove();
-	$('#article-box a').each(function(index) {
-		//change s.sme.sk/export/phone/?c=XXX to www.sme.sk/c/XXX/
-		var url = $(this).attr('href');
-		var cId = utils.urlParam('c', $(this).attr('href'));
-		if (/s.sme.sk\//i.test(url) && cId) {
-			$(this).attr('href', 'http://www.sme.sk/c/' + cId + '/');
-		}
-	});
+	// extract just body content and remove useless tags
+	text = text.replace(/[\s\S]*?<body>/, '');
+	text = text.replace(/<\/body>[\s\S]*/, '');
+	text = text.replace(/<link .*\/>/g, '');
+	text = text.replace(/<script [\s\S]*?<\/script>/g, '');
+	text = text.replace(/<style [\s\S]*?<\/style>/g, '');
+	text = text.replace(/<h1>.*<\/h1>/g, '');
+
+	var itext_content = document.getElementById("itext_content");
+	itext_content.innerHTML = text;
+
+	// tag removal based on its class is "safer" using DOM than string manipulation
+	utils.remove(itext_content.querySelector(".topfoto"));
+	utils.remove(itext_content.querySelector(".discus"));
+
+	// remove annoying SME Android app banners
+	var apps = itext_content.querySelectorAll('a[href="market://details?id=sk.sme.android.reader"]');
+	for (var i = 0; i < apps.length; i++) {
+		utils.remove(apps[i].parentNode);
+	}
+
+	// change s.sme.sk/export/phone/?c=XXX to www.sme.sk/c/XXX/
+	var prefix = "http://s.sme.sk/export/phone/?c=";
+	var anchors = document.getElementById("article-box").querySelectorAll('a[href^="' + prefix + '"]');
+	for (var i = 0; i < anchors.length; i++) {
+		anchors[i].href = "http://www.sme.sk/c/" + anchors[i].href.replace(prefix, "") + "/";
+	}
 });
 
-//this is not pretty but who cares
-var isPiano1 = ($('#article-box #itext_content .art-perex-piano').length != 0);
-var isPiano2 = ($('#article-box #itext_content .art-nexttext-piano').length != 0);
-//quick fix for changes at sme 16.05.2014
-var isPiano3 = ($('#article-box div[id^=pianoArticle]').length != 0);
-if (isPiano1 || isPiano2 || isPiano3) {
+// check for piano content (message)
+var itext_content = document.getElementById("itext_content");
+if (null != itext_content
+	&& (null != itext_content.querySelector("div[id^=pianoArticle]")
+		|| null != itext_content.querySelector(".art-nexttext-piano")
+		|| null != itext_content.querySelector(".art-perex-piano"))) {
 	var articleId = utils.articleId();
 	if (articleId) {
-		self.port.emit('loadPage', articleId);
+		self.port.emit("loadPage", articleId);
 	}
 }

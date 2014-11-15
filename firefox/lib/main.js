@@ -6,7 +6,6 @@ var request = require("sdk/request").Request;
 articleMod({
 	include: /.*.sme.sk\/c\/.*/,
 	contentScriptFile: [
-		data.url("jquery-2.0.0.min.js"),
 		data.url("utils.js"),
 		data.url("article.js")
 	],
@@ -30,7 +29,6 @@ articleMod({
 videoMod({
 	include: "*.tv.sme.sk",
 	contentScriptFile: [
-		data.url("jquery-2.0.0.min.js"),
 		data.url("utils.js"),
 		data.url("video.js")
 	],

@@ -1,21 +1,30 @@
 self.port.on("rewritePage", function(text) {
-	//remove javascript from response
-	text = text.replace(/<script/g, '<!--script');
-	text = text.replace(/<\/script/g, '</script--');
-	//some magic
-	$('.video').html(text);
-	$('.video h1').hide();
-	$('.video style').remove();
-	$('.v-podcast-box').remove();
-	$('.video').prepend('<video src="' + $($('.video .iosvideo a')[0]).attr('href') + '" controls poster="' + $($('.video .iosvideo img')[0]).attr('src') + '" width="640" height="360">');
-	$('.video .tv-video').hide();
+	// extract just body content and remove useless tags
+	text = text.replace(/[\s\S]*?<body>/, '');
+	text = text.replace(/<\/body>[\s\S]*/, '');
+	text = text.replace(/<link .*\/>/g, '');
+	text = text.replace(/<script [\s\S]*?<\/script>/g, '');
+	text = text.replace(/<style [\s\S]*?<\/style>/g, '');
+	text = text.replace(/<h1>.*<\/h1>/g, '');
+
+	var tmp = document.createElement("div");
+	tmp.innerHTML = text;
+	var iosvideo = tmp.querySelector(".iosvideo");
+
+	document.querySelector(".video").innerHTML =
+		'<video src="'
+		+ iosvideo.querySelector("a").href
+		+ '" controls poster="'
+		+ iosvideo.querySelector("img").src
+		+ '" width="640" height="360">';
+
+	utils.remove(document.querySelector(".v-podcast-box"));
 });
 
-//check for piano content (message)
-var isPiano = ($('.tvpiano').length != 0);
-if (isPiano) {
+// check for piano content (message)
+if (null != document.querySelector(".tvpiano")) {
 	var articleId = utils.articleId();
 	if (articleId) {
-		self.port.emit('loadPage', articleId);
+		self.port.emit("loadPage", articleId);
 	}
 }
