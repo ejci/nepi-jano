@@ -1,32 +1,34 @@
-Nepi Jano! extension
+Nepi Jano! extension 0.10.0
 =======
 
-Nepi Jano! is a extension for Google Chrome and Safari that allows to use paid features on [www.sme.sk](http://www.sme.sk).
+Nepi Jano! is a extension for Google Chrome, Firefox & Safari that allows to read paid articles on [www.sme.sk](http://www.sme.sk).
  
-##Instalation / Update Google Chrome (0.9.7)
-* [Download extension](https://github.com/ejci/nepi-jano/raw/master/releases/nepi_jano_0.9.7.crx.zip) (.zip)
+##Instalation / Update Google Chrome (0.10.0)
+* [Download extension](https://github.com/ejci/nepi-jano/raw/master/releases/nepi_jano_0.10.0.crx.zip) (.zip)
 * Unzip downloaded file (.crx)
 * Type chrome://extensions in your Google Chrome browser
 * Drag and drop unziped (.crx) file to Google Chrome extensions tab
 
 ###Alternative guide for Chrome 35+ on Windows
-* [Download extension](https://github.com/ejci/nepi-jano/raw/master/releases/nepi_jano_0.9.7.zip) (.zip)
+* [Download extension](https://github.com/ejci/nepi-jano/raw/master/releases/nepi_jano_0.10.0.zip) (.zip)
 * Unzip downloaded file (.zip)
 * Type chrome://extensions in your Google Chrome browser
 * Enable "*Developer mode*"
 * "*Load unpacked extension...*" from folder where you unpacked the extension
 
 
-##Installation / Update Firefox (0.9.7)
+##Old version for Firefox and Safari
+###Installation / Update Firefox (0.9.7)
 * [Download addon](https://github.com/ejci/nepi-jano/raw/master/releases/nepi-jano_0.9.7.xpi)
 * New Tab -> Open File ... (Ctrl+O)
 * Select the downloaded addon (.xpi)
 * Press Install Now
 
-##Instalation / Update Safari (0.9.7)
+###Instalation / Update Safari (0.9.7)
 * [Download extension](https://github.com/ejci/nepi-jano/raw/master/releases/nepi-jano_0.9.7.safariextz) (.safariextz)
 * Doubleclick the downloaded .safariextz file
 * Pres Install
+
 
 ##How to use it
 Just install extension and click on some paid link on [www.sme.sk](http://www.sme.sk) and wait for it...
@@ -41,7 +43,7 @@ Buy [Piano](http://www.pianomedia.sk) subscription. You wil save hungry children
 
 ---
 #####Version
-* 0.9.7
+* 0.10.0
 
 #####Author
 * [Miroslav Magda](http://ejci.net)
@@ -58,6 +60,9 @@ All code is open source and dual licensed under GPL and MIT. Check the individua
 
 
 ###Change log
+
+####0.10.0
+* Update for sme.sk update of mobile app
 
 ####0.9.7
 * Update for sme.sk redesign

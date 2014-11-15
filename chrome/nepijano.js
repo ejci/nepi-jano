@@ -1,20 +1,17 @@
 /**
  * @fileOverview Nepi Jano Google Chrome extension
  * @author Miroslav Magda, http://blog.ejci.net
- * @version 0.9.6.1
+ * @version 0.10.0
  */
 
-/**
- * sme.sk
- */
-var sme = (function() {
+(function() {
 	/**
 	 * some utils
 	 */
 	var utils = {};
 
 	/**
-	 * get parameter from url (if exists)
+	 * Get parameter from url (if exists)
 	 */
 	utils.urlParam = function(name, url) {
 		url = (url) ? url : window.location.href;
@@ -31,7 +28,52 @@ var sme = (function() {
 	};
 
 	/**
-	 * Artcile ID
+	 * Remove elemtns with selector from document
+	 */
+	utils.removeSelector = function(doc, selector) {
+		var elements = doc.querySelectorAll(selector);
+		var i = elements.length;
+		while (i--) {
+			elements[i].parentNode.removeChild(elements[i]);
+		}
+		return doc;
+	};
+
+	/**
+	 * Fix urls in anchors
+	 */
+	utils.fixAnchors = function(doc) {
+		var elements = doc.querySelectorAll('a');
+		var i = elements.length;
+		while (i--) {
+			var url = elements[i].getAttribute('href');
+			var articleId = utils.urlParam('c', url);
+			var galleryId = utils.urlParam('g', url);
+			if (/s.sme.sk\//i.test(url) && articleId) {
+				elements[i].setAttribute('href', document.location.protocol + '//' + document.location.hostname + '/c/' + articleId + '/');
+			}
+			if (/s.sme.sk\//i.test(url) && galleryId) {
+				elements[i].setAttribute('href', document.location.protocol + '//' + document.location.hostname + '/galeria/' + galleryId + '/' + Math.random().toString(36).substr(2, length) + '/');
+			}
+
+		}
+		return doc;
+	};
+	/**
+	 * Fix video tags
+	 */
+	utils.fixVideos = function(doc) {
+		var elements = doc.querySelectorAll('.iosvideo');
+		var i = elements.length;
+		while (i--) {
+			var videoUrl = elements[i].querySelector('a[href$=mp4]').getAttribute('href');
+			var videoPosterUrl = elements[i].querySelector('.videoimg').getAttribute('src');
+			elements[i].innerHTML = '<video src="' + videoUrl + '" controls poster="' + videoPosterUrl + '" width="100%" preload="none">';
+		}
+		return doc;
+	};
+	/**
+	 * Get article id from url
 	 */
 	utils.articleId = function() {
 		var articleId = document.location.pathname.split('/')[2];
@@ -42,165 +84,53 @@ var sme = (function() {
 		}
 		return false;
 	};
-	/**
-	 * Get video ID
-	 */
-	utils.videoId = function() {
-		var videoId = document.location.pathname.split('/')[2];
-		if (parseInt(videoId, 10) == videoId) {
-			return videoId;
-		} else {
-			return false;
-		}
-		return false;
-	};
-	/**
-	 * Init app
-	 */
-	var init = function() {
-		//video
-		if (/tv.sme.sk\//i.test(document.location)) {
-			//console.log('Nepi Jano: video');
-			allowVideo();
-		}
-		//article
-		else if (/sme.sk\/c\//i.test(document.location)) {
-			//console.log('Nepi Jano: article');
-			allowArticle();
-		}
-	};
-	/**
-	 * Check if video is blocked.
-	 * If is blocked show mobile content instead.
-	 */
-	var allowVideo = function() {
-		try {
-			//check for piano content (message)
-			var isPiano = ($('.tvpiano').length != 0);
-			if (isPiano) {
-				//console.log('Nepi Jano: Changing content :) ');
-				var articleId = utils.articleId();
-				if (articleId) {
-					//css3 "magic"
-					$('.video').attr('style', '-webkit-transition: all 1s ease-in-out');
-					$('.video').attr('style', '-webkit-filter: blur(8px);');
-					//get article id from URL
-					var url = 'http://s.sme.sk/export/phone/html/?vf=' + articleId;
-					var xhr = new XMLHttpRequest();
-					xhr.onreadystatechange = handleStateChange;
-					xhr.open("GET", url, true);
-					xhr.send();
-					function handleStateChange() {
-						if (xhr.readyState === 4) {
-							var data = xhr.responseText;
-							//remove javascript from response
-							data = data.replace(/<script/g, '<!--script');
-							data = data.replace(/<\/script/g, '</script--');
-							//some magic
-							$('.video').html(data);
-							$('.video h1').hide();
-							$('.video style').remove();
-							$('.v-podcast-box').remove();
-							$('.video').prepend('<video src="' + $($('.video .iosvideo a')[0]).attr('href') + '" controls poster="' + $($('.video .iosvideo img')[0]).attr('src') + '" width="640" height="360">');
-							$('.video .tv-video').hide();
-							var t = setTimeout(function() {
-								$('.video').attr('style', '-webkit-filter: none;');
-							}, 500);
 
-						}
-					}
+	/**
+	 * Get mobile version article
+	 */
+	utils.getArticle = function(cb) {
+		var articleId = utils.articleId();
+		request = new XMLHttpRequest();
+		request.open('GET', 'http://s.sme.sk/export/ma/?c=' + articleId, true);
+		request.onload = function() {
+			if (request.status >= 200 && request.status < 400) {
+				//				try {
+				var doc = (new DOMParser()).parseFromString(request.responseText, "text/html");
+				doc = utils.removeSelector(doc, 'script');
+				doc = utils.removeSelector(doc, 'link');
+				doc = utils.removeSelector(doc, 'style');
+				doc = utils.removeSelector(doc, '.button-bar');
+				doc = utils.fixAnchors(doc);
+				doc = utils.fixVideos(doc);
+				cb(doc.querySelector('.articlewrap'));
+				//				} catch(e) {
 
-				}
+				//				}
 			}
-		} catch(e) {
-			console.error('Nepi Jano: error', e);
-		}
-
+		};
+		request.send();
 	};
+
 	/**
-	 * Check if article is blocked.
-	 * If is blocked show mobile content instead.
+	 * Get article id from url
 	 */
-	var allowArticle = function() {
-		try {
-			//this is not pretty but who cares
-			var isPiano1 = ($('#article-box #itext_content .art-perex-piano').length != 0);
-			var isPiano2 = ($('#article-box #itext_content .art-nexttext-piano').length != 0);
-			//quick fix for changes at sme 16.05.2014
-			var isPiano3 = ($('#article-box div[id^=pianoArticle]').length != 0);
-			if (isPiano1 || isPiano2 || isPiano3) {
-				//console.log('Nepi Jano: Changing content :) ');
-				var articleId = utils.articleId();
-				if (articleId) {
-					//css3 "magic"
-					$('#article-box #itext_content').attr('style', '-webkit-transition: all 1s ease-in-out');
-					$('#article-box #itext_content').attr('style', '-webkit-filter: blur(8px);');
-					//get article id from URL
-					var url = 'http://s.sme.sk/export/phone/html/?cf=' + articleId;
-					var xhr = new XMLHttpRequest();
-					xhr.onreadystatechange = handleStateChange;
-					xhr.open("GET", url, true);
-					xhr.send();
-					function handleStateChange() {
-						if (xhr.readyState === 4) {
-							//$('#article-box #itext_content').empty();
-							var data = xhr.responseText;
-							//remove javascript from response
-							data = data.replace(/<script/g, '<!--script');
-							data = data.replace(/<\/script/g, '</script--');
-							//some magic
-							$('#article-box #itext_content').html(data);
-
-							//remove android elements
-							$('#article-box #itext_content div[style="background-color: #EEE; padding: 10px; text-align: center; font-family: Arial; margin-bottom: 8px;"]').remove();
-
-							//improve video container
-							$('#article-box #itext_content .iosvideo').css({'position': 'relative'});
-							$('#article-box #itext_content img').css({'max-width': '100%'});
-							$('#article-box #itext_content .iosplaybtn img').css({
-								'position': 'absolute',
-								'top': '50%',
-								'left': '50%',
-								'margin-left': '-95px',
-								'margin-top': '-40px'
-							});
-
-							$('#article-box #itext_content h1').hide();
-							$('#article-box #itext_content .topfoto').hide();
-							$('#article-box #itext_content .discus').hide();
-							$('#article-box #itext_content link').remove();
-							$('#article-box #itext_content style').remove();
-							$('#article-box a').each(function(index) {
-								//change s.sme.sk/export/phone/?c=XXX to www.sme.sk/c/XXX/
-								var url = $(this).attr('href');
-								var cId = utils.urlParam('c', $(this).attr('href'));
-								if (/s.sme.sk\//i.test(url) && cId) {
-									$(this).attr('href', 'http://www.sme.sk/c/' + cId + '/');
-								}
-							});
-							var t = setTimeout(function() {
-								$('#article-box #itext_content').attr('style', '-webkit-filter: none;');
-							}, 500);
-
-						}
-					}
-
-				}
-			}
-		} catch(e) {
-			console.error('Nepi Jano: error', e);
+	utils.isPiano = function() {
+		var ret = false;
+		var selectors = [];
+		selectors.push('#article-box #itext_content .art-perex-piano');
+		selectors.push('#article-box #itext_content .art-nexttext-piano');
+		selectors.push('#article-box div[id^=pianoArticle]');
+		for (var i = 0, l = selectors.length; i < l; i++) {
+			ret = ret || (document.querySelectorAll(selectors[i]).length != 0);
 		}
+		return ret;
+	};
 
-	};
-	return {
-		init : init
-	};
+	if (/sme.sk\/c\//i.test(document.location)) {
+		if (utils.isPiano()) {
+			utils.getArticle(function(html) {
+				document.querySelector('#article-box #itext_content').innerHTML = html.innerHTML;
+			});
+		}
+	}
 })();
-
-/**
- * loader for diffrent pages
- */
-//sme.sk
-if (/sme.sk\//i.test(document.location)) {
-	sme.init();
-}
