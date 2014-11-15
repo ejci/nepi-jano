@@ -18,10 +18,10 @@
 
 			}
 
-			function respondToMessage(theMessageEvent) {
-				if (theMessageEvent.name === "doXhr") {
-					var url = theMessageEvent.message;
-					doXhr(url, theMessageEvent);
+			function respondToMessage(ev) {
+				if (ev.name === "doXhr") {
+					var url = ev.message;
+					doXhr(url, ev);
 				}
 			}
 

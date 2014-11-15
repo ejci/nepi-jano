@@ -16,18 +16,18 @@ Nepi Jano! is a extension for Google Chrome, Firefox & Safari that allows to rea
 * Enable "*Developer mode*"
 * "*Load unpacked extension...*" from folder where you unpacked the extension
 
+##Instalation / Update Safari (0.10.0)
+* [Download extension](https://github.com/ejci/nepi-jano/raw/master/releases/nepi-jano_0.10.0.safariextz) (.safariextz)
+* Doubleclick the downloaded .safariextz file
+* Pres *Install*
 
-##Old version for Firefox and Safari
+
+##Old version for Firefox
 ###Installation / Update Firefox (0.9.7)
 * [Download addon](https://github.com/ejci/nepi-jano/raw/master/releases/nepi-jano_0.9.7.xpi)
 * New Tab -> Open File ... (Ctrl+O)
 * Select the downloaded addon (.xpi)
 * Press Install Now
-
-###Instalation / Update Safari (0.9.7)
-* [Download extension](https://github.com/ejci/nepi-jano/raw/master/releases/nepi-jano_0.9.7.safariextz) (.safariextz)
-* Doubleclick the downloaded .safariextz file
-* Pres Install
 
 
 ##How to use it
