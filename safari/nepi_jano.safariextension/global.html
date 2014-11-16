@@ -10,7 +10,6 @@
 				xhr.send();
 				function handleStateChange() {
 					if (xhr.readyState === 4) {
-						console.log('responseText', xhr.responseText);
 						var data = xhr.responseText;
 						event.target.page.dispatchMessage("article", data);
 					}

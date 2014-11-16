@@ -1,5 +1,5 @@
 /**
- * @fileOverview Nepi Jano Google Chrome extension
+ * @fileOverview Nepi Jano Safari extension
  * @author Miroslav Magda, http://blog.ejci.net
  * @version 0.10.0
  */
@@ -106,14 +106,15 @@ if (/sme.sk\/c\//i.test(document.location)) {
 	}
 }
 
-safari.self.addEventListener("message", function(responseText) {
-	var doc = (new DOMParser()).parseFromString(responseText, "text/html");
+safari.self.addEventListener("message", function(event) {
+	console.log(event.message);
+	var doc = (new DOMParser()).parseFromString(event.message, "text/html");
 	doc = utils.removeSelector(doc, 'script');
 	doc = utils.removeSelector(doc, 'link');
 	doc = utils.removeSelector(doc, 'style');
 	doc = utils.removeSelector(doc, '.button-bar');
 	doc = utils.fixAnchors(doc);
 	doc = utils.fixVideos(doc);
-	cb(doc.querySelector('.articlewrap'));
-	document.querySelector('#article-box #itext_content').innerHTML = html.innerHTML;
+	console.log(doc);
+	document.querySelector('#article-box #itext_content').innerHTML = doc.querySelector('.articlewrap').innerHTML;
 }, false);
