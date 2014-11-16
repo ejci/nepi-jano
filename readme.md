@@ -17,11 +17,11 @@ Nepi Jano! is a extension for Google Chrome, Firefox & Safari that allows to rea
 * "*Load unpacked extension...*" from folder where you unpacked the extension
 
 ##Instalation / Update Safari (0.10.0)
-* [Download extension](https://github.com/ejci/nepi-jano/raw/master/releases/nepi-jano_0.10.0.safariextz) (.safariextz)
+* [Download extension](https://github.com/ejci/nepi-jano/raw/master/releases/nepi_jano_0.10.0.safariextz) (.safariextz)
 * Doubleclick the downloaded .safariextz file
 * Pres *Install*
 
-##Installation / Update Firefox (0.9.7)
+##Installation / Update Firefox (0.10.0)
 * [Download addon](https://github.com/ejci/nepi-jano/raw/master/releases/nepi-jano_0.10.0.xpi)
 * New Tab -> Open File ... (Ctrl+O)
 * Select the downloaded addon (.xpi)
