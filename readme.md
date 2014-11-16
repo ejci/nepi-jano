@@ -21,13 +21,11 @@ Nepi Jano! is a extension for Google Chrome, Firefox & Safari that allows to rea
 * Doubleclick the downloaded .safariextz file
 * Pres *Install*
 
-
-##Old version for Firefox
-###Installation / Update Firefox (0.9.7)
-* [Download addon](https://github.com/ejci/nepi-jano/raw/master/releases/nepi-jano_0.9.7.xpi)
+##Installation / Update Firefox (0.9.7)
+* [Download addon](https://github.com/ejci/nepi-jano/raw/master/releases/nepi-jano_0.10.0.xpi)
 * New Tab -> Open File ... (Ctrl+O)
 * Select the downloaded addon (.xpi)
-* Press Install Now
+* Press *Install Now*
 
 
 ##How to use it
