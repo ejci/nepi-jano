@@ -1,7 +1,7 @@
 {
 	"name": "Nepi Jano!",
 	"description": "This extension allows to read paid content on www.sme.sk.",
-	"version": "0.10.0",
+	"version": "0.10.1",
 	"manifest_version": 2,
 	"permissions": ["webRequest", "webRequestBlocking", "*://*.sme.sk/*"],
 	"background": {

@@ -6,7 +6,7 @@
   "author": "Miroslav Magda, Viliam Pucik",
   "homepage": "https://github.com/ejci/nepi-jano",
   "license": "MPL 2.0",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "permissions": {
     "cross-domain-content": ["http://s.sme.sk/"]
   }

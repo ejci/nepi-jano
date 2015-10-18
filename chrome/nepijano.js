@@ -1,7 +1,8 @@
 /**
  * @fileOverview Nepi Jano Google Chrome extension
  * @author Miroslav Magda, http://blog.ejci.net
- * @version 0.10.0
+ * @author Richard Toth (fix of design changes on sme.sk)
+ * @version 0.10.1
  */
 
 (function() {
@@ -94,7 +95,6 @@
 		request.open('GET', 'http://s.sme.sk/export/ma/?c=' + articleId, true);
 		request.onload = function() {
 			if (request.status >= 200 && request.status < 400) {
-				//				try {
 				var doc = (new DOMParser()).parseFromString(request.responseText, "text/html");
 				doc = utils.removeSelector(doc, 'script');
 				doc = utils.removeSelector(doc, 'link');
@@ -102,10 +102,7 @@
 				doc = utils.removeSelector(doc, '.button-bar');
 				doc = utils.fixAnchors(doc);
 				doc = utils.fixVideos(doc);
-				cb(doc.querySelector('.articlewrap'));
-				//				} catch(e) {
-
-				//				}
+				cb(doc.querySelector('article'));
 			}
 		};
 		request.send();
@@ -117,9 +114,8 @@
 	utils.isPiano = function() {
 		var ret = false;
 		var selectors = [];
-		selectors.push('#article-box #itext_content .art-perex-piano');
-		selectors.push('#article-box #itext_content .art-nexttext-piano');
-		selectors.push('#article-box div[id^=pianoArticle]');
+		selectors.push('article.editorial-promo-on');
+		selectors.push('article div[id^=pianoSmePromo]');
 		for (var i = 0, l = selectors.length; i < l; i++) {
 			ret = ret || (document.querySelectorAll(selectors[i]).length != 0);
 		}
@@ -129,7 +125,7 @@
 	if (/sme.sk\/c\//i.test(document.location)) {
 		if (utils.isPiano()) {
 			utils.getArticle(function(html) {
-				document.querySelector('#article-box #itext_content').innerHTML = html.innerHTML;
+				document.querySelector('article.editorial-promo-on').innerHTML = html.innerHTML;
 			});
 		}
 	}
