@@ -2,7 +2,7 @@
  * @fileOverview Nepi Jano Firefox extension
  * @author Miroslav Magda, http://blog.ejci.net
  * @author Richard Toth (fix of design changes on sme.sk)
- * @version 0.10.1
+ * @version 0.10.2
  */
 
 /**
@@ -91,6 +91,9 @@ utils.articleId = function() {
 utils.isPiano = function() {
 	var ret = false;
 	var selectors = [];
+  selectors.push('#article-box #itext_content .art-perex-piano');
+  selectors.push('#article-box #itext_content .art-nexttext-piano');
+  selectors.push('#article-box div[id^=pianoArticle]');
 	selectors.push('article.editorial-promo-on');
   selectors.push('article div[id^=pianoSmePromo]');
 	for (var i = 0, l = selectors.length; i < l; i++) {
@@ -109,9 +112,23 @@ if (/sme.sk\/c\//i.test(document.location)) {
 self.port.on("rewritePage", function(responseText) {
 	responseText = responseText.replace(/<script/g, '<!--script');
 	responseText = responseText.replace(/<\/script/g, '</script--');
-	var doc = document.querySelector('article.editorial-promo-on');
+
+  var doc;
+  if (document.querySelector('#article-box #itext_content')) {
+    doc = document.querySelector('#article-box #itext_content');
+  }
+  else {
+    doc = document.querySelector('article.editorial-promo-on');
+  }
+
 	doc.innerHTML = responseText;
-	doc.innerHTML = doc.querySelector('article').innerHTML;
+  if (doc.querySelector('.articlewrap')) {
+    doc.innerHTML = doc.querySelector('.articlewrap').innerHTML;
+  }
+  else {
+    doc.innerHTML = doc.querySelector('article').innerHTML;
+  }
+
 	doc = utils.removeSelector(doc, 'script');
 	doc = utils.removeSelector(doc, 'link');
 	doc = utils.removeSelector(doc, 'style');

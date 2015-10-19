@@ -1,7 +1,8 @@
 /**
  * @fileOverview Nepi Jano Safari extension
  * @author Miroslav Magda, http://blog.ejci.net
- * @version 0.10.0
+ * @author Richard Toth (fix of design changes on sme.sk)
+ * @version 0.10.2
  */
 
 /**
@@ -93,6 +94,8 @@ utils.isPiano = function() {
 	selectors.push('#article-box #itext_content .art-perex-piano');
 	selectors.push('#article-box #itext_content .art-nexttext-piano');
 	selectors.push('#article-box div[id^=pianoArticle]');
+  selectors.push('article.editorial-promo-on');
+	selectors.push('article div[id^=pianoSmePromo]');
 	for (var i = 0, l = selectors.length; i < l; i++) {
 		ret = ret || (document.querySelectorAll(selectors[i]).length != 0);
 	}
@@ -115,6 +118,11 @@ safari.self.addEventListener("message", function(event) {
 	doc = utils.removeSelector(doc, '.button-bar');
 	doc = utils.fixAnchors(doc);
 	doc = utils.fixVideos(doc);
-	console.log(doc);
-	document.querySelector('#article-box #itext_content').innerHTML = doc.querySelector('.articlewrap').innerHTML;
+	//console.log(doc);
+  if (document.querySelector('#article-box #itext_content')) {
+    document.querySelector('#article-box #itext_content').innerHTML = doc.querySelector('.articlewrap').innerHTML;
+  }
+  else {
+    document.querySelector('article.editorial-promo-on').innerHTML = doc.querySelector('article').innerHTML;
+  }
 }, false);

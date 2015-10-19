@@ -3,10 +3,10 @@
   "title": "Nepi Jano!",
   "id": "jid1-ujYo9WP31heSeQ",
   "description": "Read paid content on www.sme.sk",
-  "author": "Miroslav Magda, Viliam Pucik",
+  "author": "Miroslav Magda, Viliam Pucik, Richard Toth",
   "homepage": "https://github.com/ejci/nepi-jano",
   "license": "MPL 2.0",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "permissions": {
     "cross-domain-content": ["http://s.sme.sk/"]
   }

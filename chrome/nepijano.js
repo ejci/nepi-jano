@@ -2,7 +2,7 @@
  * @fileOverview Nepi Jano Google Chrome extension
  * @author Miroslav Magda, http://blog.ejci.net
  * @author Richard Toth (fix of design changes on sme.sk)
- * @version 0.10.1
+ * @version 0.10.2
  */
 
 (function() {
@@ -102,7 +102,12 @@
 				doc = utils.removeSelector(doc, '.button-bar');
 				doc = utils.fixAnchors(doc);
 				doc = utils.fixVideos(doc);
-				cb(doc.querySelector('article'));
+        if (doc.querySelector('.articlewrap')) {
+          cb(doc.querySelector('.articlewrap'));
+        }
+        else {
+          cb(doc.querySelector('article'));
+        }
 			}
 		};
 		request.send();
@@ -114,6 +119,9 @@
 	utils.isPiano = function() {
 		var ret = false;
 		var selectors = [];
+    selectors.push('#article-box #itext_content .art-perex-piano');
+		selectors.push('#article-box #itext_content .art-nexttext-piano');
+		selectors.push('#article-box div[id^=pianoArticle]');
 		selectors.push('article.editorial-promo-on');
 		selectors.push('article div[id^=pianoSmePromo]');
 		for (var i = 0, l = selectors.length; i < l; i++) {
@@ -125,7 +133,12 @@
 	if (/sme.sk\/c\//i.test(document.location)) {
 		if (utils.isPiano()) {
 			utils.getArticle(function(html) {
-				document.querySelector('article.editorial-promo-on').innerHTML = html.innerHTML;
+        if (document.querySelector('#article-box #itext_content')) {
+          document.querySelector('#article-box #itext_content').innerHTML = html.innerHTML;
+        }
+        else {
+          document.querySelector('article.editorial-promo-on').innerHTML = html.innerHTML;
+        }
 			});
 		}
 	}
