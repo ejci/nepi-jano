@@ -1,8 +1,8 @@
 /**
  * @fileOverview Nepi Jano Google Chrome extension
  * @author Miroslav Magda, http://blog.ejci.net
- * @author Richard Toth (fix of design changes on sme.sk)
- * @version 0.10.2
+ * @author Richard Toth (fixes, enhancements)
+ * @version 0.10.3
  */
 
 (function() {
@@ -10,6 +10,7 @@
 	 * some utils
 	 */
 	var utils = {};
+  utils.interval = -1;
 
 	/**
 	 * Get parameter from url (if exists)
@@ -20,11 +21,7 @@
 		var regexS = "[\\?&]" + name + "=([^&#]*)";
 		var regex = new RegExp(regexS);
 		var results = regex.exec(url);
-		if (results === null) {
-			return false;
-		} else {
-			return results[1];
-		}
+		if (results !== null) return results[1];
 		return false;
 	};
 
@@ -78,11 +75,7 @@
 	 */
 	utils.articleId = function() {
 		var articleId = document.location.pathname.split('/')[2];
-		if (parseInt(articleId, 10) == articleId) {
-			return articleId;
-		} else {
-			return false;
-		}
+		if (parseInt(articleId, 10) == articleId) return articleId;
 		return false;
 	};
 
@@ -117,29 +110,41 @@
 	 * Get article id from url
 	 */
 	utils.isPiano = function() {
-		var ret = false;
 		var selectors = [];
+    selectors.push('article div[id*=piano]');
     selectors.push('#article-box #itext_content .art-perex-piano');
 		selectors.push('#article-box #itext_content .art-nexttext-piano');
 		selectors.push('#article-box div[id^=pianoArticle]');
 		selectors.push('article.editorial-promo-on');
 		selectors.push('article div[id^=pianoSmePromo]');
 		for (var i = 0, l = selectors.length; i < l; i++) {
-			ret = ret || (document.querySelectorAll(selectors[i]).length != 0);
+      if (document.querySelectorAll(selectors[i]).length > 0) return true;
 		}
-		return ret;
+		return false;
 	};
 
-	if (/sme.sk\/c\//i.test(document.location)) {
-		if (utils.isPiano()) {
-			utils.getArticle(function(html) {
+  /**
+   * Exec main logic (piano test, content replacement)
+   */
+  utils.execute = function() {
+    console.log('utils.execute()');
+    if (utils.isPiano()) {
+      console.log('   utils.isPiano() = true');
+      clearInterval(utils.interval);
+      utils.getArticle(function(html) {
         if (document.querySelector('#article-box #itext_content')) {
           document.querySelector('#article-box #itext_content').innerHTML = html.innerHTML;
         }
         else {
           document.querySelector('article.editorial-promo-on').innerHTML = html.innerHTML;
         }
-			});
-		}
+      });
+      return true;
+    }
+    return false;
+  };
+
+	if (/sme.sk\/c\//i.test(document.location)) {
+		if (!utils.execute()) utils.interval = setInterval(utils.execute, 500); // interaction with AdBlock, so try every 500 ms
 	}
 })();
