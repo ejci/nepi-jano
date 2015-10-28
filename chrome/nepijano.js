@@ -2,7 +2,7 @@
  * @fileOverview Nepi Jano Google Chrome extension
  * @author Miroslav Magda, http://blog.ejci.net
  * @author Richard Toth (fixes, enhancements)
- * @version 0.10.3
+ * @version 0.10.4
  */
 
 (function() {
@@ -11,6 +11,7 @@
 	 */
 	var utils = {};
   utils.interval = -1;
+  utils.testCounter = 0;
 
 	/**
 	 * Get parameter from url (if exists)
@@ -112,9 +113,11 @@
 	utils.isPiano = function() {
 		var selectors = [];
     selectors.push('article div[id*=piano]');
+    selectors.push('article div[class*=piano]');
     selectors.push('#article-box #itext_content .art-perex-piano');
 		selectors.push('#article-box #itext_content .art-nexttext-piano');
 		selectors.push('#article-box div[id^=pianoArticle]');
+    selectors.push('#article-box div[id*=piano]');
 		selectors.push('article.editorial-promo-on');
 		selectors.push('article div[id^=pianoSmePromo]');
 		for (var i = 0, l = selectors.length; i < l; i++) {
@@ -129,7 +132,7 @@
   utils.execute = function() {
     console.log('utils.execute()');
     if (utils.isPiano()) {
-      console.log('   utils.isPiano() = true');
+      console.log('nepi-jano: found piano');
       clearInterval(utils.interval);
       utils.getArticle(function(html) {
         if (document.querySelector('#article-box #itext_content')) {
@@ -141,6 +144,13 @@
       });
       return true;
     }
+
+    if (++utils.testCounter > 12)
+    {
+      console.log('nepi-jano: giving up');
+      clearInterval(utils.interval);
+    }
+    
     return false;
   };
 
