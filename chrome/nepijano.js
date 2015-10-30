@@ -102,7 +102,13 @@
 				doc = utils.removeSelector(doc, '.button-bar');
 				doc = utils.fixAnchors(doc);
 				doc = utils.fixVideos(doc);
-				cb(doc.querySelector('.articlewrap'));
+// check for article tag from new format and if it exists send it back
+                		if(document.getElementsByTagName("article")[0]){
+                    			cb(doc.getElementsByTagName("article")[0]);
+// if article tag is not found continue "the old way"
+		                } else {
+                	    		cb(doc.querySelector('.articlewrap'));    
+                		}
 				//				} catch(e) {
 
 				//				}
@@ -119,6 +125,9 @@
 		var selectors = [];
 		selectors.push('#article-box #itext_content .art-perex-piano');
 		selectors.push('#article-box #itext_content .art-nexttext-piano');
+// check for new format article containers
+        	selectors.push('#article-box #itext_content .sme_piano_art_promo');
+        	selectors.push('#js-article .sme_piano_art_promo');		
 		selectors.push('#article-box div[id^=pianoArticle]');
 		for (var i = 0, l = selectors.length; i < l; i++) {
 			ret = ret || (document.querySelectorAll(selectors[i]).length != 0);
@@ -129,7 +138,15 @@
 	if (/sme.sk\/c\//i.test(document.location)) {
 		if (utils.isPiano()) {
 			utils.getArticle(function(html) {
-				document.querySelector('#article-box #itext_content').innerHTML = html.innerHTML;
+                		if(html){
+// check if the old format of the page is used and replace the content
+                    			if(document.querySelector('#article-box #itext_content')){
+                        			document.querySelector('#article-box #itext_content').innerHTML = html.innerHTML;
+// if not look for the new container
+                    			} else {
+                        			document.getElementById("js-article").innerHTML = html.innerHTML;
+                    			}
+                		}
 			});
 		}
 	}
