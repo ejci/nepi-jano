@@ -127,7 +127,8 @@
 		selectors.push('#article-box #itext_content .art-nexttext-piano');
 // check for new format article containers
         	selectors.push('#article-box #itext_content .sme_piano_art_promo');
-        	selectors.push('#js-article .sme_piano_art_promo');		
+        	selectors.push('#js-article .sme_piano_art_promo');
+        	selectors.push('.piano-teaser-wrapper');
 		selectors.push('#article-box div[id^=pianoArticle]');
 		for (var i = 0, l = selectors.length; i < l; i++) {
 			ret = ret || (document.querySelectorAll(selectors[i]).length != 0);
@@ -143,9 +144,9 @@
                     			if(document.querySelector('#article-box #itext_content')){
                         			document.querySelector('#article-box #itext_content').innerHTML = html.innerHTML;
 // if not look for the new container
-                    			} else {
-                        			document.getElementById("js-article").innerHTML = html.innerHTML;
-                    			}
+                      			} else if(document.getElementsByTagName('article')){
+                        			document.getElementsByTagName('article')[0].innerHTML = html.innerHTML;
+                 			}
                 		}
 			});
 		}
