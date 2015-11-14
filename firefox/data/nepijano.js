@@ -1,5 +1,5 @@
 /**
- * @fileOverview Nepi Jano Safari extension
+ * @fileOverview Nepi Jano Firefox extension
  * @author Miroslav Magda, http://blog.ejci.net
  * @version 0.10.0
  */
@@ -102,19 +102,20 @@ utils.isPiano = function() {
 if (/sme.sk\/c\//i.test(document.location)) {
 	if (utils.isPiano()) {
 		var articleId = utils.articleId();
-		safari.self.tab.dispatchMessage("doXhr", 'http://s.sme.sk/export/ma/?c=' + articleId);
+		self.port.emit('loadPage', 'http://s.sme.sk/export/ma/?c=' + articleId);
 	}
 }
 
-safari.self.addEventListener("message", function(event) {
-	console.log(event.message);
-	var doc = (new DOMParser()).parseFromString(event.message, "text/html");
+self.port.on("rewritePage", function(responseText) {
+	responseText = responseText.replace(/<script/g, '<!--script');
+	responseText = responseText.replace(/<\/script/g, '</script--');
+	var doc = document.querySelector('#article-box #itext_content');
+	doc.innerHTML = responseText;
+	doc.innerHTML = doc.querySelector('.articlewrap').innerHTML;
 	doc = utils.removeSelector(doc, 'script');
 	doc = utils.removeSelector(doc, 'link');
 	doc = utils.removeSelector(doc, 'style');
 	doc = utils.removeSelector(doc, '.button-bar');
 	doc = utils.fixAnchors(doc);
 	doc = utils.fixVideos(doc);
-	console.log(doc);
-	document.querySelector('#article-box #itext_content').innerHTML = doc.querySelector('.articlewrap').innerHTML;
-}, false);
+});
