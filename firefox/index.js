@@ -1,11 +1,10 @@
 var data = require("sdk/self").data;
-var articleMod = require("sdk/page-mod").PageMod;
-var videoMod = require("sdk/page-mod").PageMod;
+var pageMod = require("sdk/page-mod").PageMod;
 var request = require("sdk/request").Request;
 
-articleMod({
-	include : /.*.sme.sk\/c\/.*/,
-	contentScriptFile : [data.url("nepijano.js")],
+pageMod({
+	include : /.*\.sme\.sk\/c\/\d+\/.*/,
+	contentScriptFile : data.url("nepijano.js"),
 	onAttach : function(worker) {
 		worker.port.on("loadPage", function(url) {
 			request({

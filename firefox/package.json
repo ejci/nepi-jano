@@ -1,12 +1,19 @@
 {
-  "name": "nepi-jano",
   "title": "Nepi Jano!",
-  "id": "jid1-ujYo9WP31heSeQ",
+  "name": "nepi-jano",
+  "version": "0.11.0",
   "description": "Read paid content on www.sme.sk",
+  "main": "index.js",
   "author": "Miroslav Magda, Viliam Pucik",
   "homepage": "https://github.com/ejci/nepi-jano",
-  "license": "MPL 2.0",
-  "version": "0.10.0",
+  "engines": {
+    "firefox": ">=38.0a1",
+    "fennec": ">=38.0a1"
+  },
+  "license": "MPL-2.0",
+  "keywords": [
+    "jetpack"
+  ],
   "permissions": {
     "cross-domain-content": ["http://s.sme.sk/"]
   }
