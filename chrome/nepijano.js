@@ -103,7 +103,7 @@
 				doc = utils.fixAnchors(doc);
 				doc = utils.fixVideos(doc);
 // check for article tag from new format and if it exists send it back
-                		if(document.getElementsByTagName("article")[0]){
+                		if(doc.getElementsByTagName("article")[0]){
                     			cb(doc.getElementsByTagName("article")[0]);
 // if article tag is not found continue "the old way"
 		                } else {
@@ -126,9 +126,9 @@
 		selectors.push('#article-box #itext_content .art-perex-piano');
 		selectors.push('#article-box #itext_content .art-nexttext-piano');
 // check for new format article containers
-        	selectors.push('#article-box #itext_content .sme_piano_art_promo');
-        	selectors.push('#js-article .sme_piano_art_promo');
         	selectors.push('.piano-teaser-wrapper');
+        	selectors.push('#pianoSmePromoBox');
+        	selectors.push('.sme_piano_art_promo');        	
 		selectors.push('#article-box div[id^=pianoArticle]');
 		for (var i = 0, l = selectors.length; i < l; i++) {
 			ret = ret || (document.querySelectorAll(selectors[i]).length != 0);
